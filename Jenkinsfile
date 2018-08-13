@@ -17,13 +17,7 @@ pipeline {
 	
 	stages{
 		
-		stage('Checkout') {
-			steps{
-				echo "------------>Checkout<------------"
-				git branch: '*/master', credentialsId: 'GitHub_santiago616', url: 'https://github.com/santiago616/CeibaProject.git'
-				sh 'gradle clean'
-			}
-		}
+stage('Checkout'){steps{echo "------------>Checkout<------------"checkout([$class: 'GitSCM', branches: [[name: '*/master']],doGenerateSubmoduleConfigurations: false, extensions: [], gitTool:'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId:'GitHub_santiago616', url:'https://github.com/santiago616/CeibaProject.git']]])}}
 		
 		stage('Compile') {
 			steps{
