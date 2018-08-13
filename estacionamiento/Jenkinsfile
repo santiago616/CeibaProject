@@ -20,7 +20,7 @@ pipeline {
 		stage('Checkout') {
 			steps{
 				echo "------------>Checkout<------------"
-				git branch: 'master', credentialsId: 'GitHub_santiago616', url: 'https://github.com/santiago616/CeibaProject.git'
+				git branch: '*/master', credentialsId: 'GitHub_santiago616', url: 'https://github.com/santiago616/CeibaProject.git'
 				sh 'gradle clean'
 			}
 		}
