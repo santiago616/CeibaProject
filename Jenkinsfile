@@ -52,7 +52,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "------------>Build<------------"
-                sh 'gradle --b ./CeibaProject/build.gradle build -x test'
+                sh 'gradle --b ./build.gradle build -x test'
             }
         }
     }
@@ -62,7 +62,7 @@ pipeline {
         }
         success {
             echo 'This will run only if successful'
-            junit '**/CeibaProject/build/test-results/test/*.xml'
+            junit '**./build/test-results/test/*.xml'
         }
         failure {
             echo 'This will run only if failed'
