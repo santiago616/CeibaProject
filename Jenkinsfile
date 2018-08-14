@@ -30,6 +30,14 @@ pipeline {
                                                                url          : 'https://github.com/santiago616/CeibaProject']]])
             }
         }
+		
+		 stage('Compile') {
+			steps {
+				echo "------------>Compile<------------"
+				sh 'gradle clean'
+				sh 'gradle --b ./build.gradle compileJava'
+			}
+		}
         stage('Unit Tests') {
             steps {
                 echo "------------>Unit Tests<------------"
