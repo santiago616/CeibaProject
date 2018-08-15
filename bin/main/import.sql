@@ -1,0 +1,1 @@
+insert into VEHICULO (ID,COLOR,PLACA) values (1234,'Rojo','SQ212');
