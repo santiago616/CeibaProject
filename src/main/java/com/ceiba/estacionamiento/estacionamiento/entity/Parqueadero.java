@@ -29,6 +29,19 @@ public class Parqueadero implements Serializable{
 	public Parqueadero() {
 		super();
 	}
+	
+	
+
+
+	public Parqueadero(Long id, String nombre, Long telefono, String direccion) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.direccion = direccion;
+	}
+
+
 
 
 	public Long getId() {

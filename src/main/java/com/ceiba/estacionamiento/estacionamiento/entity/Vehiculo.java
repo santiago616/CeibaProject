@@ -21,7 +21,7 @@ public class Vehiculo implements Serializable {
 
 	private String placa;
 
-	private String color;
+	private String tipo;
 
 	
 	
@@ -29,9 +29,9 @@ public class Vehiculo implements Serializable {
 		super();
 	}
 
-	public Vehiculo(String color, String placa) {
+	public Vehiculo(String tipo, String placa) {
 		this.placa = placa;
-		this.color = color;
+		this.tipo = tipo;
 	}
 
 	public Long getId() {
@@ -50,17 +50,17 @@ public class Vehiculo implements Serializable {
 		this.placa = placa;
 	}
 
-	public String getColor() {
-		return color;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
 	public String toString() {
-		return "Vehiculo [id=" + id + ", placa=" + placa + ", color=" + color + "]";
+		return "Vehiculo [id=" + id + ", placa=" + placa + ", tipo=" + tipo + "]";
 	}
 
 	

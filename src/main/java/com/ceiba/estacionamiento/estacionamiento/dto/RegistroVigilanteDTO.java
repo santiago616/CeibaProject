@@ -18,7 +18,7 @@ public class RegistroVigilanteDTO {
 		
 		private Date horaSalida;
 		
-		private Boolean estado;
+		private Boolean facturado;
 		
 		private BigDecimal totalServicio;
 		
@@ -30,13 +30,13 @@ public class RegistroVigilanteDTO {
 		
 
 		public RegistroVigilanteDTO(Long id, String placa, int cilindraje, Date horaEntrada, Date horaSalida,
-				Boolean estado, BigDecimal totalServicio, Parqueadero parqueadero) {
+				Boolean facturado, BigDecimal totalServicio, Parqueadero parqueadero) {
 			this.id = id;
 			this.placa = placa;
 			this.cilindraje = cilindraje;
 			this.horaEntrada = horaEntrada;
 			this.horaSalida = horaSalida;
-			this.estado = estado;
+			this.facturado = facturado;
 			this.totalServicio = totalServicio;
 			this.parqueadero = parqueadero;
 		}
@@ -83,12 +83,12 @@ public class RegistroVigilanteDTO {
 			this.horaSalida = horaSalida;
 		}
 
-		public Boolean getEstado() {
-			return estado;
+		public Boolean getFacturado() {
+			return facturado;
 		}
 
-		public void setEstado(Boolean estado) {
-			this.estado = estado;
+		public void setFacturado(Boolean facturado) {
+			this.facturado = facturado;
 		}
 
 		public BigDecimal getTotalServicio() {

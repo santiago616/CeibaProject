@@ -18,7 +18,7 @@ public class VehiculoService implements IVehiculoService{
 	
 	@Override
 	public List<Vehiculo> mostrarVehiculos() {
-		List<Vehiculo> vehiculos = (List<Vehiculo>) vehiculoRepository.findAll();
+		List<Vehiculo> vehiculos =  vehiculoRepository.findAll();
 		return vehiculos;
 	}
 

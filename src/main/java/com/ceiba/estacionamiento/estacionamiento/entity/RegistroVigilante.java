@@ -27,7 +27,7 @@ public class RegistroVigilante implements Serializable{
 	
 	private Date horaSalida;
 	
-	private Boolean estado;
+	private Boolean facturado;
 	
 	private BigDecimal totalServicio;
 	
@@ -36,6 +36,21 @@ public class RegistroVigilante implements Serializable{
 	public RegistroVigilante() {
 		super();
 	}
+	
+	
+
+	public RegistroVigilante( String placa, int cilindraje, Date horaEntrada, Date horaSalida, Boolean facturado,
+			BigDecimal totalServicio, Parqueadero parqueadero) {
+		this.placa = placa;
+		this.cilindraje = cilindraje;
+		this.horaEntrada = horaEntrada;
+		this.horaSalida = horaSalida;
+		this.facturado = facturado;
+		this.totalServicio = totalServicio;
+		this.parqueadero = parqueadero;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -77,12 +92,12 @@ public class RegistroVigilante implements Serializable{
 		this.horaSalida = horaSalida;
 	}
 
-	public Boolean getEstado() {
-		return estado;
+	public Boolean getFacturado() {
+		return facturado;
 	}
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
+	public void setFacturado(Boolean facturado) {
+		this.facturado = facturado;
 	}
 
 	public BigDecimal getTotalServicio() {
@@ -105,7 +120,7 @@ public class RegistroVigilante implements Serializable{
 	@Override
 	public String toString() {
 		return "RegistroVigilante [id=" + id + ", placa=" + placa + ", cilindraje=" + cilindraje + ", horaEntrada="
-				+ horaEntrada + ", horaSalida=" + horaSalida + ", estado=" + estado + ", totalServicio=" + totalServicio
+				+ horaEntrada + ", horaSalida=" + horaSalida + ", estado=" + facturado + ", totalServicio=" + totalServicio
 				+ ", parqueadero=" + parqueadero + "]";
 	}
 
