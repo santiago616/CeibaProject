@@ -17,45 +17,48 @@ import com.ceiba.estacionamiento.estacionamiento.service.IParqueaderoService;
 import com.ceiba.estacionamiento.estacionamiento.service.IRegistroVigilanteService;
 
 @Service
-public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService{
+public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 
-	
-	RegistroVigilanteRepository	registroVigilanteRepository;
-	
+	RegistroVigilanteRepository registroVigilanteRepository;
+
 	IParqueaderoService parqueaderoService;
-	
-	Registro registroParqueadero= new Registro();
-	
-	private final  ModelMapper modelMapper = new ModelMapper();
-	
+
+	Registro registroParqueadero = new Registro();
+
+	private final ModelMapper modelMapper = new ModelMapper();
+
 	@Autowired
-	public RegistroVigilanteServiceImpl(RegistroVigilanteRepository	registroVigilanteRepository,
+	public RegistroVigilanteServiceImpl(RegistroVigilanteRepository registroVigilanteRepository,
 			IParqueaderoService parqueaderoService) {
-		this.registroVigilanteRepository=registroVigilanteRepository;
-		this.parqueaderoService=parqueaderoService;
+		this.registroVigilanteRepository = registroVigilanteRepository;
+		this.parqueaderoService = parqueaderoService;
 	}
-	
+
 	@Override
 	@Transactional
 	public void almacenarRegistro(RegistroDTO registroVigilanteDTO) {
-		RegistroDTO vehiculoExistente= consultarVehiculoPorPlaca(registroVigilanteDTO.getPlaca());
-		if(vehiculoExistente==null&&validarIngresoVehiculo(registroVigilanteDTO.getTipo(), registroVigilanteDTO.getPlaca())) {
-		registroVigilanteDTO.setHoraEntrada(new Date());
-		registroVigilanteDTO.setHoraSalida(new Date());
-		registroVigilanteDTO.setFacturado(Boolean.FALSE);
-		RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO,RegistroEntity.class);
-		registroVigilanteRepository.save(registroVigilante);
-		}else {
-			//EL AUTO YA ESTA ALMACENADO
-		}
+		RegistroDTO vehiculoExistente = consultarVehiculoPorPlaca(registroVigilanteDTO.getPlaca());
+		
+			if (vehiculoExistente == null
+					&& validarIngresoVehiculo(registroVigilanteDTO.getTipo(), registroVigilanteDTO.getPlaca())) {
+				registroVigilanteDTO.setHoraEntrada(new Date());
+				registroVigilanteDTO.setHoraSalida(new Date());
+				registroVigilanteDTO.setFacturado(Boolean.FALSE);
+				RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO, RegistroEntity.class);
+				registroVigilanteRepository.save(registroVigilante);
+
+			} else {
+				// EL AUTO YA ESTA ALMACENADO
+			}
+		
 	}
 
 	@Override
 	@Transactional
 	public void facturarVehiculo(RegistroDTO registroVigilanteDTO) {
-		if(registroVigilanteDTO.getId()!=null) {
+		if (registroVigilanteDTO.getId() != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());
-			BigDecimal tarifaTotalPorVehiculo=registroParqueadero.calcularValorParqueadero(registroVigilanteDTO);
+			BigDecimal tarifaTotalPorVehiculo = registroParqueadero.calcularValorParqueadero(registroVigilanteDTO);
 			registroVigilanteDTO.setTotalServicio(tarifaTotalPorVehiculo);
 			registroVigilanteDTO.setFacturado(Boolean.TRUE);
 			actualizarRegistroFacturado(registroVigilanteDTO);
@@ -63,13 +66,13 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService{
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public RegistroDTO consultarVehiculoPorPlaca(String placa) {
-		if(placa!=null) {
-			RegistroEntity registroVigilante= registroVigilanteRepository.buscarRegistroPorPlaca(placa);
-			if(registroVigilante.getId()!=null) {
-			RegistroDTO registroVigilanteDTO= modelMapper.map(registroVigilante,RegistroDTO.class);
-			return registroVigilanteDTO;
+		if (placa != null) {
+			RegistroEntity registroVigilante = registroVigilanteRepository.buscarRegistroPorPlaca(placa);
+			if (registroVigilante.getId() != null) {
+				RegistroDTO registroVigilanteDTO = modelMapper.map(registroVigilante, RegistroDTO.class);
+				return registroVigilanteDTO;
 			}
 		}
 		return null;
@@ -78,25 +81,19 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService{
 	@Override
 	@Transactional
 	public void actualizarRegistroFacturado(RegistroDTO registroVigilanteDTO) {
-		if(registroVigilanteDTO.getId()!=null) {
-			RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO,RegistroEntity.class);
+		if (registroVigilanteDTO.getId() != null) {
+			RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO, RegistroEntity.class);
 			registroVigilanteRepository.save(registroVigilante);
 			registroVigilanteRepository.flush();
 		}
-		
+
 	}
 
 	@Override
-	public boolean validarIngresoVehiculo(String tipoVehiculo,String placa) {
-		boolean existenCuposDisponibles= parqueaderoService.validarCuposParqueadero(tipoVehiculo);
-		boolean placaValida=parqueaderoService.validarPlacaVehiculo(placa);
-		
-		return (existenCuposDisponibles&&placaValida);
+	public Boolean validarIngresoVehiculo(String tipoVehiculo, String placa) {
+		Boolean existenCuposDisponibles = parqueaderoService.validarCuposParqueadero(tipoVehiculo);
+		Boolean placaValida = parqueaderoService.validarPlacaVehiculo(placa);
+		return (existenCuposDisponibles && placaValida);
 	}
-
-
-
-	
-	
 
 }

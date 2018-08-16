@@ -10,12 +10,12 @@ public interface RegistroVigilanteRepository  extends JpaRepository<RegistroEnti
 
 	
 	@Query(value =  "	SELECT r"
-			+ "	FROM Registro r "
+			+ "	FROM registro r "
 			+ "	WHERE r.facturado = true and UPPER(r.placa) LIKE UPPER(':placa')")
 	RegistroEntity buscarRegistroPorPlaca(@Param("placa") String placa);
 	
 	@Query(value =  "	SELECT count(r.id)"
-			+ "	FROM Registro r "
+			+ "	FROM registro r "
 			+ "	WHERE r.facturado = false and UPPER(r.tipoVehiculo) LIKE UPPER(':tipoVehiculo')")
 	Long buscarRegistrosPorTipoVehiculo(@Param("tipoVehiculo")String tipoVehiculo);
 	

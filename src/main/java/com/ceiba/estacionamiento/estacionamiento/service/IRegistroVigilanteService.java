@@ -11,6 +11,6 @@ public interface IRegistroVigilanteService {
 	
 	public void actualizarRegistroFacturado(RegistroDTO registroVigilante);
 	
-	public boolean validarIngresoVehiculo(String tipoVehiculo,String placa);
+	public Boolean validarIngresoVehiculo(String tipoVehiculo,String placa);
 
 }
