@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ceiba.estacionamiento.estacionamiento.dto.RegistroVigilanteDTO;
-import com.ceiba.estacionamiento.estacionamiento.entity.Vehiculo;
+import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
 import com.ceiba.estacionamiento.estacionamiento.service.IRegistroVigilanteService;
 
 @RestController
@@ -23,7 +22,7 @@ public class RegistroVigilanteController {
 	private IRegistroVigilanteService registroVigilanteService;
 	
 	@PostMapping
-	public void guardarRegistro(@RequestBody RegistroVigilanteDTO registroVigilanteDTO) {
+	public void guardarRegistro(@RequestBody RegistroDTO registroVigilanteDTO) {
 		System.out.println(registroVigilanteDTO.getId());
 		if(registroVigilanteDTO!=null) {
 			registroVigilanteService.almacenarRegistro(registroVigilanteDTO);
@@ -31,7 +30,7 @@ public class RegistroVigilanteController {
 	}
 	
 	@PutMapping
-	public void facturarRegistro(@RequestBody RegistroVigilanteDTO registroVigilanteDTO) {
+	public void facturarRegistro(@RequestBody RegistroDTO registroVigilanteDTO) {
 		System.out.println(registroVigilanteDTO.getId());
 		if(registroVigilanteDTO!=null) {
 			registroVigilanteService.facturarVehiculo(registroVigilanteDTO);
@@ -39,8 +38,7 @@ public class RegistroVigilanteController {
 	}
 	
 	@RequestMapping(value = "/vehiculosParq/{id}", method = RequestMethod.GET)
-	public RegistroVigilanteDTO obtenerRegistro(@PathVariable(value="id")Long id) {
-		System.out.println(id);
-		return registroVigilanteService.consultarVehiculoPorId(id);
+	public RegistroDTO obtenerRegistro(@PathVariable(value="placa")String placa) {
+		return registroVigilanteService.consultarVehiculoPorPlaca(placa);
 	}
 }

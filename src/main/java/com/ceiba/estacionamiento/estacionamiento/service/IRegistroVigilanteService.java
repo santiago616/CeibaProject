@@ -1,17 +1,16 @@
 package com.ceiba.estacionamiento.estacionamiento.service;
-
-import org.hibernate.annotations.Loader;
-
-import com.ceiba.estacionamiento.estacionamiento.dto.RegistroVigilanteDTO;
+import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
 
 public interface IRegistroVigilanteService {
 	
-	public void almacenarRegistro(RegistroVigilanteDTO registroVigilante);
+	public void almacenarRegistro(RegistroDTO registroVigilante);
 	
-	public void facturarVehiculo(RegistroVigilanteDTO registroVigilanteDTO);
+	public void facturarVehiculo(RegistroDTO registroVigilanteDTO);
 	
-	public RegistroVigilanteDTO consultarVehiculoPorId(Long id);
+	public RegistroDTO consultarVehiculoPorPlaca(String placa);
 	
-	public void actualizarRegistroFacturado(RegistroVigilanteDTO registroVigilante);
+	public void actualizarRegistroFacturado(RegistroDTO registroVigilante);
+	
+	public boolean validarIngresoVehiculo(String tipoVehiculo,String placa);
 
 }

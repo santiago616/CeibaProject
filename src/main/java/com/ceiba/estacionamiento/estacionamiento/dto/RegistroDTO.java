@@ -3,9 +3,8 @@ package com.ceiba.estacionamiento.estacionamiento.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.ceiba.estacionamiento.estacionamiento.entity.Parqueadero;
 
-public class RegistroVigilanteDTO {
+public class RegistroDTO {
 
 
 		private Long id;
@@ -22,15 +21,16 @@ public class RegistroVigilanteDTO {
 		
 		private BigDecimal totalServicio;
 		
-		private Parqueadero parqueadero;
+		private String tipo;
+		
 
-		public RegistroVigilanteDTO() {
+		public RegistroDTO() {
 			super();
 		}
 		
 
-		public RegistroVigilanteDTO(Long id, String placa, int cilindraje, Date horaEntrada, Date horaSalida,
-				Boolean facturado, BigDecimal totalServicio, Parqueadero parqueadero) {
+		public RegistroDTO(Long id, String placa, int cilindraje, Date horaEntrada, Date horaSalida,
+				Boolean facturado, BigDecimal totalServicio,String tipo) {
 			this.id = id;
 			this.placa = placa;
 			this.cilindraje = cilindraje;
@@ -38,7 +38,7 @@ public class RegistroVigilanteDTO {
 			this.horaSalida = horaSalida;
 			this.facturado = facturado;
 			this.totalServicio = totalServicio;
-			this.parqueadero = parqueadero;
+			this.tipo=tipo;
 		}
 
 
@@ -98,16 +98,19 @@ public class RegistroVigilanteDTO {
 		public void setTotalServicio(BigDecimal totalServicio) {
 			this.totalServicio = totalServicio;
 		}
-		
-		
-		public Parqueadero getParqueadero() {
-			return parqueadero;
+
+
+		public String getTipo() {
+			return tipo;
 		}
 
-		public void setParqueadero(Parqueadero parqueadero) {
-			this.parqueadero = parqueadero;
-		}
 
+		public void setTipo(String tipo) {
+			this.tipo = tipo;
+		}
+		
+		
+	
 		
 		
 		

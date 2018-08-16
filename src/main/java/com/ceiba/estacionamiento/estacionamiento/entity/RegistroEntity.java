@@ -12,8 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity
-public class RegistroVigilante implements Serializable {
+@Entity(name = "registro")
+public class RegistroEntity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,21 +36,21 @@ public class RegistroVigilante implements Serializable {
 
 	private BigDecimal totalServicio;
 
-	private Parqueadero parqueadero;
+	private String tipoVehiculo;
 
-	public RegistroVigilante() {
+	public RegistroEntity() {
 		super();
 	}
 
-	public RegistroVigilante(String placa, int cilindraje, Date horaEntrada, Date horaSalida, Boolean facturado,
-			BigDecimal totalServicio, Parqueadero parqueadero) {
+	public RegistroEntity(String placa, int cilindraje, Date horaEntrada, Date horaSalida, Boolean facturado,
+			BigDecimal totalServicio, String tipoVehiculo) {
 		this.placa = placa;
 		this.cilindraje = cilindraje;
 		this.horaEntrada = horaEntrada;
 		this.horaSalida = horaSalida;
 		this.facturado = facturado;
 		this.totalServicio = totalServicio;
-		this.parqueadero = parqueadero;
+		this.tipoVehiculo = tipoVehiculo;
 	}
 
 	public Long getId() {
@@ -104,20 +109,19 @@ public class RegistroVigilante implements Serializable {
 		this.totalServicio = totalServicio;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public Parqueadero getParqueadero() {
-		return parqueadero;
+	public String getTipoVehiculo() {
+		return tipoVehiculo;
 	}
 
-	public void setParqueadero(Parqueadero parqueadero) {
-		this.parqueadero = parqueadero;
+	public void setTipoVehiculo(String tipoVehiculo) {
+		this.tipoVehiculo = tipoVehiculo;
 	}
 
 	@Override
 	public String toString() {
-		return "RegistroVigilante [id=" + id + ", placa=" + placa + ", cilindraje=" + cilindraje + ", horaEntrada="
-				+ horaEntrada + ", horaSalida=" + horaSalida + ", estado=" + facturado + ", totalServicio="
-				+ totalServicio + ", parqueadero=" + parqueadero + "]";
+		return "Registro [id=" + id + ", placa=" + placa + ", cilindraje=" + cilindraje + ", horaEntrada=" + horaEntrada
+				+ ", horaSalida=" + horaSalida + ", facturado=" + facturado + ", totalServicio=" + totalServicio
+				+ ", tipoVehiculo=" + tipoVehiculo + "]";
 	}
 
 }
