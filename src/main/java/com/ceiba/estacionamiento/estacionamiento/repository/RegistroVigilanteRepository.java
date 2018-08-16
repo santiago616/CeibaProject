@@ -1,4 +1,4 @@
-package com.ceiba.estacionamiento.estacionamiento.Repository;
+package com.ceiba.estacionamiento.estacionamiento.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -13,33 +13,31 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class RegistroVigilante implements Serializable{
-	
+public class RegistroVigilante implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String placa;
-	
+
 	private int cilindraje;
-	
+
 	private Date horaEntrada;
-	
+
 	private Date horaSalida;
-	
+
 	private Boolean facturado;
-	
+
 	private BigDecimal totalServicio;
-	
+
 	private Parqueadero parqueadero;
 
 	public RegistroVigilante() {
 		super();
 	}
-	
-	
 
-	public RegistroVigilante( String placa, int cilindraje, Date horaEntrada, Date horaSalida, Boolean facturado,
+	public RegistroVigilante(String placa, int cilindraje, Date horaEntrada, Date horaSalida, Boolean facturado,
 			BigDecimal totalServicio, Parqueadero parqueadero) {
 		this.placa = placa;
 		this.cilindraje = cilindraje;
@@ -49,8 +47,6 @@ public class RegistroVigilante implements Serializable{
 		this.totalServicio = totalServicio;
 		this.parqueadero = parqueadero;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -107,8 +103,8 @@ public class RegistroVigilante implements Serializable{
 	public void setTotalServicio(BigDecimal totalServicio) {
 		this.totalServicio = totalServicio;
 	}
-	
-	@OneToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public Parqueadero getParqueadero() {
 		return parqueadero;
 	}
@@ -120,12 +116,8 @@ public class RegistroVigilante implements Serializable{
 	@Override
 	public String toString() {
 		return "RegistroVigilante [id=" + id + ", placa=" + placa + ", cilindraje=" + cilindraje + ", horaEntrada="
-				+ horaEntrada + ", horaSalida=" + horaSalida + ", estado=" + facturado + ", totalServicio=" + totalServicio
-				+ ", parqueadero=" + parqueadero + "]";
+				+ horaEntrada + ", horaSalida=" + horaSalida + ", estado=" + facturado + ", totalServicio="
+				+ totalServicio + ", parqueadero=" + parqueadero + "]";
 	}
-
-	
-	
-	
 
 }

@@ -23,8 +23,6 @@ public class Vehiculo implements Serializable {
 
 	private String tipo;
 
-	
-	
 	public Vehiculo() {
 		super();
 	}
@@ -63,5 +61,4 @@ public class Vehiculo implements Serializable {
 		return "Vehiculo [id=" + id + ", placa=" + placa + ", tipo=" + tipo + "]";
 	}
 
-	
 }

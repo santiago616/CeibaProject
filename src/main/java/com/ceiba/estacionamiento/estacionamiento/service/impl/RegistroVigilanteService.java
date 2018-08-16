@@ -1,4 +1,4 @@
-package com.ceiba.estacionamiento.estacionamiento.ServiceImpl;
+package com.ceiba.estacionamiento.estacionamiento.service.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ceiba.estacionamiento.estacionamiento.IService.IRegistroVigilanteService;
-import com.ceiba.estacionamiento.estacionamiento.Repository.RegistroVigilanteRepository;
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroVigilanteDTO;
 import com.ceiba.estacionamiento.estacionamiento.entity.RegistroVigilante;
+import com.ceiba.estacionamiento.estacionamiento.repository.RegistroVigilanteRepository;
+import com.ceiba.estacionamiento.estacionamiento.service.IRegistroVigilanteService;
 
 @Service
 public class RegistroVigilanteService implements IRegistroVigilanteService{

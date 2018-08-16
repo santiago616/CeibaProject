@@ -1,4 +1,4 @@
-package com.ceiba.estacionamiento.estacionamiento.IService;
+package com.ceiba.estacionamiento.estacionamiento.service;
 
 import java.util.List;
 

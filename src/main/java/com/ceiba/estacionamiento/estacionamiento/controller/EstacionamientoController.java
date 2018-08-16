@@ -1,4 +1,4 @@
-package com.ceiba.estacionamiento.estacionamiento.Controller;
+package com.ceiba.estacionamiento.estacionamiento.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ceiba.estacionamiento.estacionamiento.ServiceImpl.VehiculoService;
 import com.ceiba.estacionamiento.estacionamiento.entity.Vehiculo;
+import com.ceiba.estacionamiento.estacionamiento.service.impl.VehiculoService;
 
 @RestController
 public class EstacionamientoController {
