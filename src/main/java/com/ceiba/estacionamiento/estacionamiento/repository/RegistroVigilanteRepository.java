@@ -9,14 +9,15 @@ import com.ceiba.estacionamiento.estacionamiento.entity.RegistroEntity;
 public interface RegistroVigilanteRepository  extends JpaRepository<RegistroEntity, Long>{
 
 	
-	@Query(value =  "	SELECT r"
-			+ "	FROM registro r "
-			+ "	WHERE r.facturado = true and UPPER(r.placa) LIKE UPPER(':placa')")
+//	@Query(value =  "	SELECT r"
+//			+ "	FROM registro r "
+//			+ "	WHERE r.facturado = true and UPPER(r.placa) LIKE UPPER(':placa')")
+	@Query(value =  "	SELECT r from registro r where r.facturado = false and UPPER(r.placa) like (:placa)")
 	RegistroEntity buscarRegistroPorPlaca(@Param("placa") String placa);
 	
 	@Query(value =  "	SELECT count(r.id)"
 			+ "	FROM registro r "
-			+ "	WHERE r.facturado = false and UPPER(r.tipoVehiculo) LIKE UPPER(':tipoVehiculo')")
+			+ "	WHERE r.facturado = false and UPPER(r.tipoVehiculo) LIKE UPPER(:tipoVehiculo)")
 	Long buscarRegistrosPorTipoVehiculo(@Param("tipoVehiculo")String tipoVehiculo);
 	
 	

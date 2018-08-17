@@ -29,15 +29,14 @@ public class RegistroVigilanteController {
 		}
 	}
 	
-	@PutMapping
-	public void facturarRegistro(@RequestBody RegistroDTO registroVigilanteDTO) {
-		System.out.println(registroVigilanteDTO.getId());
-		if(registroVigilanteDTO!=null) {
-			registroVigilanteService.facturarVehiculo(registroVigilanteDTO);
+	@PutMapping(value = "/registro/{placa}")
+	public void facturarRegistro(@PathVariable(value="placa") String placa) {
+		if(placa!=null) {
+			registroVigilanteService.facturarVehiculo(placa);
 		}
 	}
 	
-	@RequestMapping(value = "/vehiculosParq/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/registro/{id}", method = RequestMethod.GET)
 	public RegistroDTO obtenerRegistro(@PathVariable(value="placa")String placa) {
 		return registroVigilanteService.consultarVehiculoPorPlaca(placa);
 	}

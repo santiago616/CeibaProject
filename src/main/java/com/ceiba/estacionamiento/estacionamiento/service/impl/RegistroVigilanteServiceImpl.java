@@ -40,9 +40,8 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 		RegistroDTO vehiculoExistente = consultarVehiculoPorPlaca(registroVigilanteDTO.getPlaca());
 		
 			if (vehiculoExistente == null
-					&& validarIngresoVehiculo(registroVigilanteDTO.getTipo(), registroVigilanteDTO.getPlaca())) {
+					&& validarIngresoVehiculo(registroVigilanteDTO.getTipoVehiculo(), registroVigilanteDTO.getPlaca())) {
 				registroVigilanteDTO.setHoraEntrada(new Date());
-				registroVigilanteDTO.setHoraSalida(new Date());
 				registroVigilanteDTO.setFacturado(Boolean.FALSE);
 				RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO, RegistroEntity.class);
 				registroVigilanteRepository.save(registroVigilante);
@@ -55,9 +54,12 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 
 	@Override
 	@Transactional
-	public void facturarVehiculo(RegistroDTO registroVigilanteDTO) {
-		if (registroVigilanteDTO.getId() != null) {
+	public void facturarVehiculo(String placa) {
+		RegistroDTO registroVigilanteDTO=consultarVehiculoPorPlaca(placa);
+		if (registroVigilanteDTO != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());
+			registroVigilanteDTO.getHoraSalida();
+			registroVigilanteDTO.getHoraSalida().setHours(21);
 			BigDecimal tarifaTotalPorVehiculo = registroParqueadero.calcularValorParqueadero(registroVigilanteDTO);
 			registroVigilanteDTO.setTotalServicio(tarifaTotalPorVehiculo);
 			registroVigilanteDTO.setFacturado(Boolean.TRUE);
@@ -70,7 +72,7 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	public RegistroDTO consultarVehiculoPorPlaca(String placa) {
 		if (placa != null) {
 			RegistroEntity registroVigilante = registroVigilanteRepository.buscarRegistroPorPlaca(placa);
-			if (registroVigilante.getId() != null) {
+			if (registroVigilante != null) {
 				RegistroDTO registroVigilanteDTO = modelMapper.map(registroVigilante, RegistroDTO.class);
 				return registroVigilanteDTO;
 			}

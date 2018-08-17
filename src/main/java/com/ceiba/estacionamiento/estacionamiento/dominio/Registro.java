@@ -18,7 +18,7 @@ public class Registro {
 
 	public static final BigDecimal VALOR_DIA_CARRO = new BigDecimal(8000);
 
-	public static final BigDecimal VALOR_DIA_MOTO = new BigDecimal(400);
+	public static final BigDecimal VALOR_DIA_MOTO = new BigDecimal(4000);
 
 	public static final int LIMITE_CILINDRAJE = 500;
 
@@ -55,6 +55,7 @@ public class Registro {
 			dias++;
 			if (diff > TIEMPO_MAXIMO_DIA) {
 				int horasAdicionales = diff.intValue() % TIEMPO_MAXIMO_DIA;
+				dias=0;
 				dias += Math.floorDiv(diff.intValue(), TIEMPO_MAXIMO_DIA);
 				if (horasAdicionales < TIEMPO_MAXIMO_HORAS) {
 					horas += horasAdicionales;
@@ -71,16 +72,16 @@ public class Registro {
 
 	public BigDecimal calcularTarifaTipoVehiculo(RegistroDTO registroVigilante, double[] tiempoTotal) {
 		BigDecimal totalTarifa = new BigDecimal(0);
-		if (registroVigilante.getTipo() == MOTO) {
-			totalTarifa = (VALOR_DIA_MOTO.multiply((BigDecimal.valueOf(tiempoTotal[0]))
-					.add(VALOR_HORA_MOTO.multiply(BigDecimal.valueOf(tiempoTotal[1])))));
+		if (registroVigilante.getTipoVehiculo().equalsIgnoreCase(MOTO)) {
+			totalTarifa = VALOR_DIA_MOTO.multiply(BigDecimal.valueOf(tiempoTotal[0])).add(VALOR_HORA_MOTO.multiply(BigDecimal.valueOf(tiempoTotal[1])));
+			
 			if (registroVigilante.getCilindraje() > LIMITE_CILINDRAJE) {
-				totalTarifa.add(VALOR_LIMITE_CILINDRAJE);
+				totalTarifa=totalTarifa.add(VALOR_LIMITE_CILINDRAJE);
 			}
 		} else {
-			if (registroVigilante.getTipo() == AUTO) {
-				totalTarifa = (VALOR_DIA_CARRO.multiply(BigDecimal.valueOf(tiempoTotal[0]))
-						.add(VALOR_HORA_CARRO.multiply(BigDecimal.valueOf(tiempoTotal[1]))));
+			if (registroVigilante.getTipoVehiculo().equalsIgnoreCase(AUTO)) {
+				totalTarifa =VALOR_DIA_CARRO.multiply(BigDecimal.valueOf(tiempoTotal[0]))
+						.add(VALOR_HORA_CARRO.multiply(BigDecimal.valueOf(tiempoTotal[1])));
 			}
 		}
 
@@ -89,10 +90,10 @@ public class Registro {
 
 	public Boolean validarDisponiblidadCupos(Long cuposUsados, String tipo) {
 
-		if (tipo.equals(AUTO) && cuposUsados < TOTAL_DISPONIBILIDAD_AUTOS) {
+		if (tipo.equalsIgnoreCase(AUTO) && cuposUsados < TOTAL_DISPONIBILIDAD_AUTOS) {
 			return Boolean.TRUE;
 		} else {
-			if (tipo.equals(MOTO) && cuposUsados < TOTAL_DISPONIBILIDAD_MOTOS) {
+			if (tipo.equalsIgnoreCase(MOTO) && cuposUsados < TOTAL_DISPONIBILIDAD_MOTOS) {
 				return Boolean.TRUE;
 			}
 		}

@@ -5,7 +5,7 @@ public interface IRegistroVigilanteService {
 	
 	public void almacenarRegistro(RegistroDTO registroVigilante);
 	
-	public void facturarVehiculo(RegistroDTO registroVigilanteDTO);
+	public void facturarVehiculo(String placa);
 	
 	public RegistroDTO consultarVehiculoPorPlaca(String placa);
 	

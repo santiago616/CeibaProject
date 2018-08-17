@@ -21,7 +21,7 @@ public class RegistroDTO {
 		
 		private BigDecimal totalServicio;
 		
-		private String tipo;
+		private String tipoVehiculo;
 		
 
 		public RegistroDTO() {
@@ -38,7 +38,7 @@ public class RegistroDTO {
 			this.horaSalida = horaSalida;
 			this.facturado = facturado;
 			this.totalServicio = totalServicio;
-			this.tipo=tipo;
+			this.tipoVehiculo=tipo;
 		}
 
 
@@ -100,13 +100,13 @@ public class RegistroDTO {
 		}
 
 
-		public String getTipo() {
-			return tipo;
+		public String getTipoVehiculo() {
+			return tipoVehiculo;
 		}
 
 
-		public void setTipo(String tipo) {
-			this.tipo = tipo;
+		public void setTipoVehiculo(String tipo) {
+			this.tipoVehiculo = tipo;
 		}
 		
 		
