@@ -1,6 +1,6 @@
 package com.ceiba.estacionamiento.estacionamiento.controller;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +23,6 @@ public class RegistroVigilanteController {
 	
 	@PostMapping
 	public void guardarRegistro(@RequestBody RegistroDTO registroVigilanteDTO) {
-		System.out.println(registroVigilanteDTO.getId());
 		if(registroVigilanteDTO!=null) {
 			registroVigilanteService.almacenarRegistro(registroVigilanteDTO);
 		}

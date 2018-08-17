@@ -29,9 +29,8 @@ public class RegistroDTO {
 		}
 		
 
-		public RegistroDTO(Long id, String placa, int cilindraje, Date horaEntrada, Date horaSalida,
+		public RegistroDTO( String placa, int cilindraje, Date horaEntrada, Date horaSalida,
 				Boolean facturado, BigDecimal totalServicio,String tipo) {
-			this.id = id;
 			this.placa = placa;
 			this.cilindraje = cilindraje;
 			this.horaEntrada = horaEntrada;

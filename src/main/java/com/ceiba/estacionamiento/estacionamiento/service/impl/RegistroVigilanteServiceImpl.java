@@ -2,7 +2,6 @@ package com.ceiba.estacionamiento.estacionamiento.service.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,8 +72,8 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 		if (placa != null) {
 			RegistroEntity registroVigilante = registroVigilanteRepository.buscarRegistroPorPlaca(placa);
 			if (registroVigilante != null) {
-				RegistroDTO registroVigilanteDTO = modelMapper.map(registroVigilante, RegistroDTO.class);
-				return registroVigilanteDTO;
+				
+				return modelMapper.map(registroVigilante, RegistroDTO.class);
 			}
 		}
 		return null;
