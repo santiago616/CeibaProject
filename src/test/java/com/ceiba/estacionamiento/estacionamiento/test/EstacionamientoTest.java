@@ -145,4 +145,6 @@ public class EstacionamientoTest {
 		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
 		assertEquals(new BigDecimal("12000.0"), tarifaParqueo);
 	}
+	
+	
 }

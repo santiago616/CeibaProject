@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-
+import com.ceiba.estacionamiento.estacionamiento.dominio.Estacionamiento;
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
 import com.ceiba.estacionamiento.estacionamiento.entity.RegistroEntity;
 import com.ceiba.estacionamiento.estacionamiento.repository.RegistroVigilanteRepository;
@@ -28,6 +28,9 @@ public class RegistroVigilanteMockitoTest {
 	
 	
 	private IRegistroVigilanteService registroVigilanteService;
+	
+	@Mock
+	private Estacionamiento estacionamiento;
 	
 	@Mock
 	private IEstacionamientoService estacionamientoService;
@@ -106,6 +109,7 @@ public class RegistroVigilanteMockitoTest {
 		
 		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.FALSE);
 		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
+		when(estacionamiento.validarDisponiblidadCupos(new Long(15), registroTest.getTipoVehiculo())).thenReturn(Boolean.FALSE);
 		
 		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
