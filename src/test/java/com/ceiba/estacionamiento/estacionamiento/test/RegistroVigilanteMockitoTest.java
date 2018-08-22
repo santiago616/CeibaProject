@@ -98,6 +98,39 @@ public class RegistroVigilanteMockitoTest {
 	}
 	
 	@Test
+	public void testValidarIngresoMotoestacionamiento_cupoNoDisponible() {
+	
+		RegistroDTO registroTest= new RegistroDTO();
+		registroTest.setPlaca("PQP22D");
+		registroTest.setTipoVehiculo("moto");
+		
+		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.FALSE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
+		
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
+		
+		assertEquals(false, ingresoValido);
+	}
+	
+	@Test
+	public void testValidarIngresoMotoestacionamiento_cupoDisponible() {
+	
+		RegistroDTO registroTest= new RegistroDTO();
+		registroTest.setPlaca("PQP22D");
+		registroTest.setTipoVehiculo("moto");
+		
+		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
+		
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
+		
+		assertEquals(true, ingresoValido);
+	}
+	
+	
+
+	
+	@Test
 	public void testValidarIngresoVehiculoestacionamiento_placaNoValida() {
 	
 		RegistroDTO registroTest= new RegistroDTO();
@@ -112,6 +145,40 @@ public class RegistroVigilanteMockitoTest {
 		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(false, ingresoValido);
+	}
+	
+	@Test
+	public void testValidarIngresoMotoestacionamiento_placaNoValida() {
+	
+		RegistroDTO registroTest= new RegistroDTO();
+		registroTest.setPlaca("AQP22D");
+		registroTest.setTipoVehiculo("moto");
+		Calendar hoy = Calendar.getInstance();
+		hoy.set(2018, Calendar.AUGUST, 20,1,00);
+		registroTest.setHoraEntrada(hoy.getTime());
+		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.FALSE);
+		
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
+		
+		assertEquals(false, ingresoValido);
+	}
+	
+	@Test
+	public void testValidarIngresoMotoestacionamiento_placaValida() {
+	
+		RegistroDTO registroTest= new RegistroDTO();
+		registroTest.setPlaca("PQP22D");
+		registroTest.setTipoVehiculo("moto");
+		Calendar hoy = Calendar.getInstance();
+		hoy.set(2018, Calendar.AUGUST, 21,1,00);
+		registroTest.setHoraEntrada(hoy.getTime());
+		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
+		
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
+		
+		assertEquals(true, ingresoValido);
 	}
 	
 	@Test

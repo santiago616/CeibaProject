@@ -56,7 +56,6 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 		RegistroDTO registroVigilanteDTO=consultarVehiculoPorPlaca(placa);
 		if (registroVigilanteDTO != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());
-			registroVigilanteDTO.getHoraSalida();
 			BigDecimal tarifaTotalPorVehiculo = registroEstacionamiento.calcularValorParqueadero(registroVigilanteDTO);
 			registroVigilanteDTO.setTotalServicio(tarifaTotalPorVehiculo);
 			registroVigilanteDTO.setFacturado(Boolean.TRUE);
