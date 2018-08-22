@@ -32,7 +32,7 @@ public class RegistroVigilanteControllerTest {
                 .isCreated();
 		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.post("/registroVigilante/guardarRegistro")
         .contentType(MediaType.APPLICATION_JSON)
-        .content("{\"placa\": \"SQ213\",\"cilindraje\": 600, \"horaEntrada\": null,\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
+        .content("{\"placa\": \"SQ213\",\"cilindraje\": 600, \"horaEntrada\": \"2018-08-17T09:15\",\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
 		
 		
 		 this.mockMvc.perform(builder)
@@ -46,7 +46,7 @@ public class RegistroVigilanteControllerTest {
                 .isBadRequest();
 		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.post("/registroVigilante/guardarRegistro")
         .contentType(MediaType.APPLICATION_JSON)
-		.content("{\"placa\": \"\",\"cilindraje\": 600, \"horaEntrada\": null,\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
+		.content("{\"placa\": \"\",\"cilindraje\": 600, \"horaEntrada\": \"2018-08-17T09:15\",\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
 		
 		 this.mockMvc.perform(builder)
 		 .andExpect(bad)
