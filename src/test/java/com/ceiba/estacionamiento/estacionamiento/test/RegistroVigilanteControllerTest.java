@@ -42,7 +42,47 @@ public class RegistroVigilanteControllerTest {
 	}
 	
 	@Test
+    public void testGuardarRegistroEstacionamientoFailed() throws Exception {
+		ResultMatcher bad = MockMvcResultMatchers.status()
+                .isBadRequest();
+		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.post("/registroVigilante/guardarRegistro")
+        .contentType(MediaType.APPLICATION_JSON);
+		
+		
+		 this.mockMvc.perform(builder)
+		 .andExpect(bad)
+         .andDo(print());
+	}
+	
+	@Test
     public void testFacturarRegistroEstacionamiento() throws Exception {
+		ResultMatcher ok = MockMvcResultMatchers.status()
+                .isOk();
+		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.put("/registroVigilante/registro/{placa}","SQ400")
+        .contentType(MediaType.APPLICATION_JSON);
+        
+		
+		 this.mockMvc.perform(builder)
+		 .andExpect(ok)
+         .andDo(print());
+	}
+	
+	@Test
+    public void testFacturarRegistroEstacionamientoFailed() throws Exception {
+		ResultMatcher bad = MockMvcResultMatchers.status()
+                .isNotFound();
+		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.put("/registroVigilante/registro/{placa}","")
+        .contentType(MediaType.APPLICATION_JSON);
+        
+		
+		 this.mockMvc.perform(builder)
+		 .andExpect(bad)
+         .andDo(print());
+	}
+	
+	
+	@Test
+    public void testConsultarRegistroEstacionamiento() throws Exception {
 		ResultMatcher ok = MockMvcResultMatchers.status()
                 .isOk();
 		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.get("/registroVigilante/registro/{placa}","SQ212")
@@ -54,17 +94,16 @@ public class RegistroVigilanteControllerTest {
          .andDo(print());
 	}
 	
-	
 	@Test
-    public void testConsultarRegistroEstacionamiento() throws Exception {
-		ResultMatcher ok = MockMvcResultMatchers.status()
-                .isOk();
-		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.put("/registroVigilante/registro/{id}","SQ213")
+    public void testConsultarRegistroEstacionamientoFailed() throws Exception {
+		ResultMatcher bad = MockMvcResultMatchers.status()
+                .isBadRequest();
+		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.get("/registroVigilante/registro/{placa}","SQ111")
         .contentType(MediaType.APPLICATION_JSON);
         
 		
 		 this.mockMvc.perform(builder)
-		 .andExpect(ok)
+		 .andExpect(bad)
          .andDo(print());
 	}
 }

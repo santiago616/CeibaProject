@@ -1,7 +1,6 @@
 package com.ceiba.estacionamiento.estacionamiento.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.modelmapper.ModelMapper;
@@ -58,7 +57,6 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 		if (registroVigilanteDTO != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());
 			registroVigilanteDTO.getHoraSalida();
-			registroVigilanteDTO.getHoraSalida().setHours(21);
 			BigDecimal tarifaTotalPorVehiculo = registroEstacionamiento.calcularValorParqueadero(registroVigilanteDTO);
 			registroVigilanteDTO.setTotalServicio(tarifaTotalPorVehiculo);
 			registroVigilanteDTO.setFacturado(Boolean.TRUE);

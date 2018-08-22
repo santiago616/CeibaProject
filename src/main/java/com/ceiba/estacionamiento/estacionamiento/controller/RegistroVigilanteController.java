@@ -28,7 +28,7 @@ public class RegistroVigilanteController {
 	public ResponseEntity<Void> guardarRegistro(@RequestBody RegistroDTO registroVigilanteDTO) {
 		if(registroVigilanteDTO!=null) {
 			registroVigilanteService.almacenarRegistro(registroVigilanteDTO);
-			return new ResponseEntity<Void>(HttpStatus.CREATED);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		return null;
 	}
@@ -37,9 +37,9 @@ public class RegistroVigilanteController {
 	public ResponseEntity<Void> facturarRegistro(@PathVariable(value="placa") String placa) {
 		if(placa!=null) {
 			registroVigilanteService.facturarVehiculo(placa);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return null;
+		return ResponseEntity.badRequest().body(null);
 	}
 	
 	@RequestMapping(value = "/registro/{placa}", method = RequestMethod.GET)
