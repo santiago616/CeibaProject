@@ -100,9 +100,8 @@ public class Estacionamiento {
 		return Boolean.FALSE;
 	}
 
-	public Boolean validarPlacaDomingoLunes(RegistroDTO registroVigilanteDTO) {
+	public Boolean validarPlacaDomingoLunes(RegistroDTO registroVigilanteDTO,Calendar hoy) {
 		Boolean puedeIngresar = Boolean.TRUE;
-		Calendar hoy = Calendar.getInstance();
 		if (registroVigilanteDTO.getPlaca().substring(0, 1).equals(RESTRICION_PLACA)) {
 			if (hoy.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || hoy.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
 				puedeIngresar = Boolean.TRUE;
