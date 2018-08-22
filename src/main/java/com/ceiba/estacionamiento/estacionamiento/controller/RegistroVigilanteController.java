@@ -24,22 +24,22 @@ public class RegistroVigilanteController {
 	@Autowired
 	private IRegistroVigilanteService registroVigilanteService;
 	
-	@PostMapping(path = "/guardarRegistro", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/guardarRegistro")
 	public ResponseEntity<Void> guardarRegistro(@RequestBody RegistroDTO registroVigilanteDTO) {
 		if(!registroVigilanteDTO.getPlaca().isEmpty()) {
 			registroVigilanteService.almacenarRegistro(registroVigilanteDTO);
 			return new ResponseEntity<>(HttpStatus.CREATED);
+		}else {
+			return ResponseEntity.badRequest().body(null);
 		}
-		return ResponseEntity.badRequest().body(null);
 	}
 	
 	@PutMapping(value = "/registro/{placa}")
 	public ResponseEntity<Void> facturarRegistro(@PathVariable(value="placa") String placa) {
-		if(!placa.isEmpty()) {
+		
 			registroVigilanteService.facturarVehiculo(placa);
 			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		return ResponseEntity.badRequest().body(null);
+		
 	}
 	
 	@RequestMapping(value = "/registro/{placa}", method = RequestMethod.GET)
