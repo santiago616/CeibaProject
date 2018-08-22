@@ -27,18 +27,6 @@ public class RegistroDTO {
 		public RegistroDTO() {
 			super();
 		}
-		
-
-		public RegistroDTO( String placa, int cilindraje, Date horaEntrada, Date horaSalida,
-				Boolean facturado, BigDecimal totalServicio,String tipo) {
-			this.placa = placa;
-			this.cilindraje = cilindraje;
-			this.horaEntrada = horaEntrada;
-			this.horaSalida = horaSalida;
-			this.facturado = facturado;
-			this.totalServicio = totalServicio;
-			this.tipoVehiculo=tipo;
-		}
 
 
 

@@ -40,17 +40,6 @@ public class RegistroEntity implements Serializable {
 		super();
 	}
 
-	public RegistroEntity(String placa, int cilindraje, Date horaEntrada, Date horaSalida, Boolean facturado,
-			BigDecimal totalServicio, String tipoVehiculo) {
-		this.placa = placa;
-		this.cilindraje = cilindraje;
-		this.horaEntrada = horaEntrada;
-		this.horaSalida = horaSalida;
-		this.facturado = facturado;
-		this.totalServicio = totalServicio;
-		this.tipoVehiculo = tipoVehiculo;
-	}
-
 	public Long getId() {
 		return id;
 	}
