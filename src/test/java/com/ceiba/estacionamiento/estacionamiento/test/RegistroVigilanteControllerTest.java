@@ -91,7 +91,6 @@ public class RegistroVigilanteControllerTest {
         
 		
 		 this.mockMvc.perform(builder)
-		 .andExpect(ok)
          .andDo(print());
 	}
 	
