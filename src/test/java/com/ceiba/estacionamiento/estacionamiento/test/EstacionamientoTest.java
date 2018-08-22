@@ -24,7 +24,7 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularAuto_diaTresHoras() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo("auto");
+		registro.setTipoVehiculo(Estacionamiento.AUTO);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
 		
@@ -39,7 +39,7 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularMoto_diaTresHoras() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo("MOTO");
+		registro.setTipoVehiculo(Estacionamiento.MOTO);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
 		
@@ -54,7 +54,7 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularMoto_diezHorasSeisCiencuentaCC() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo("MOTO");
+		registro.setTipoVehiculo(Estacionamiento.MOTO);
 		registro.setCilindraje(650);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
@@ -70,7 +70,7 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularMoto_diezHorasMenoCilindraje() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo("MOTO");
+		registro.setTipoVehiculo(Estacionamiento.MOTO);
 		registro.setCilindraje(500);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
@@ -86,7 +86,7 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularAuto_dosDiasNueveHoras() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo("auto");
+		registro.setTipoVehiculo(Estacionamiento.AUTO);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
 		
@@ -101,7 +101,7 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularAuto_dosDiasOchoHoras() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo("auto");
+		registro.setTipoVehiculo(Estacionamiento.AUTO);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
 		
@@ -116,7 +116,7 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularMoto_dosDiasNueveHorasSeisCientosCC() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo("MOTO");
+		registro.setTipoVehiculo(Estacionamiento.MOTO);
 		registro.setCilindraje(600);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
@@ -133,7 +133,7 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularMoto_dosDiasOchoHorasCuatroCientosCC() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo("MOTO");
+		registro.setTipoVehiculo(Estacionamiento.MOTO);
 		registro.setCilindraje(400);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
@@ -146,5 +146,45 @@ public class EstacionamientoTest {
 		assertEquals(new BigDecimal("12000.0"), tarifaParqueo);
 	}
 	
+	
+	@Test
+	public void testCuposDisponibleMoto() {
+		RegistroDTO registro = new RegistroDTO();
+		registro.setTipoVehiculo(Estacionamiento.MOTO);
+		registro.setCilindraje(400);
+		
+		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(15), registro.getTipoVehiculo());
+		assertEquals(true, cuposDisponibles);
+	}
+	
+	
+	@Test
+	public void testCuposNoDisponibleMoto() {
+		RegistroDTO registro = new RegistroDTO();
+		registro.setTipoVehiculo(Estacionamiento.MOTO);
+		registro.setCilindraje(400);
+		
+		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(20), registro.getTipoVehiculo());
+		assertEquals(false, cuposDisponibles);
+	}
+	
+	
+	@Test
+	public void testCuposDisponibleAuto() {
+		RegistroDTO registro = new RegistroDTO();
+		registro.setTipoVehiculo(Estacionamiento.AUTO);
+		
+		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(15), registro.getTipoVehiculo());
+		assertEquals(true, cuposDisponibles);
+	}
+	
+	
+	@Test
+	public void testCuposNoDisponibleAuto() {
+		RegistroDTO registro = new RegistroDTO();
+		registro.setTipoVehiculo(Estacionamiento.AUTO);
+		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(20), registro.getTipoVehiculo());
+		assertEquals(false, cuposDisponibles);
+	}
 	
 }
