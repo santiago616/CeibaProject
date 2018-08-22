@@ -1,7 +1,6 @@
 package com.ceiba.estacionamiento.estacionamiento.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.modelmapper.ModelMapper;
@@ -38,9 +37,9 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	@Transactional
 	public void almacenarRegistro(RegistroDTO registroVigilanteDTO) {
 		RegistroDTO vehiculoExistente = consultarVehiculoPorPlaca(registroVigilanteDTO.getPlaca());
-		Calendar hoy = Calendar.getInstance();
+
 			if (vehiculoExistente == null
-					&& validarIngresoVehiculo(registroVigilanteDTO,hoy)) {
+					&& validarIngresoVehiculo(registroVigilanteDTO)) {
 				registroVigilanteDTO.setFacturado(Boolean.FALSE);
 				RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO, RegistroEntity.class);
 				registroVigilanteRepository.save(registroVigilante);
@@ -89,9 +88,9 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	}
 
 	@Override
-	public Boolean validarIngresoVehiculo(RegistroDTO registroVigilanteDTO,Calendar hoy) {
+	public Boolean validarIngresoVehiculo(RegistroDTO registroVigilanteDTO) {
 		Boolean existenCuposDisponibles = estacionamientoService.validarCuposEstacionamiento(registroVigilanteDTO.getTipoVehiculo());
-		Boolean placaValida = estacionamientoService.validarPlacaVehiculo(registroVigilanteDTO,hoy);
+		Boolean placaValida = estacionamientoService.validarPlacaVehiculo(registroVigilanteDTO);
 		return (existenCuposDisponibles && placaValida);
 	}
 

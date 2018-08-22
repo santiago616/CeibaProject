@@ -1,6 +1,7 @@
 package com.ceiba.estacionamiento.estacionamiento.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -187,4 +188,5 @@ public class EstacionamientoTest {
 		assertEquals(false, cuposDisponibles);
 	}
 	
+
 }

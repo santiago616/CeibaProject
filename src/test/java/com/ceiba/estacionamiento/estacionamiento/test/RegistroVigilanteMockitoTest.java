@@ -74,11 +74,11 @@ public class RegistroVigilanteMockitoTest {
 		registroTest.setPlaca("PNG121");
 		registroTest.setTipoVehiculo("auto");
 		
-		Calendar hoy = Calendar.getInstance();
-		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.FALSE);
-		when(estacionamientoService.validarPlacaVehiculo(registroTest,hoy)).thenReturn(Boolean.TRUE);
 		
-		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest,hoy);
+		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.FALSE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
+		
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(false, ingresoValido);
 	}
@@ -89,11 +89,11 @@ public class RegistroVigilanteMockitoTest {
 		RegistroDTO registroTest= new RegistroDTO();
 		registroTest.setPlaca("PNG121");
 		registroTest.setTipoVehiculo("auto");
-		Calendar hoy = Calendar.getInstance();
-		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
-		when(estacionamientoService.validarPlacaVehiculo(registroTest,hoy)).thenReturn(Boolean.TRUE);
 		
-		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest,hoy);
+		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
+		
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(true, ingresoValido);
 	}
@@ -104,11 +104,11 @@ public class RegistroVigilanteMockitoTest {
 		RegistroDTO registroTest= new RegistroDTO();
 		registroTest.setPlaca("PQP22D");
 		registroTest.setTipoVehiculo("moto");
-		Calendar hoy = Calendar.getInstance();
-		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.FALSE);
-		when(estacionamientoService.validarPlacaVehiculo(registroTest,hoy)).thenReturn(Boolean.TRUE);
 		
-		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest,hoy);
+		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.FALSE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
+		
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(false, ingresoValido);
 	}
@@ -119,12 +119,11 @@ public class RegistroVigilanteMockitoTest {
 		RegistroDTO registroTest= new RegistroDTO();
 		registroTest.setPlaca("PQP22D");
 		registroTest.setTipoVehiculo("moto");
-
-		Calendar hoy = Calendar.getInstance();
-		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
-		when(estacionamientoService.validarPlacaVehiculo(registroTest,hoy)).thenReturn(Boolean.TRUE);
 		
-		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest,hoy);
+		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
+		
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(true, ingresoValido);
 	}
@@ -142,9 +141,9 @@ public class RegistroVigilanteMockitoTest {
 		hoy.set(2018, Calendar.AUGUST, 20,1,00);
 		registroTest.setHoraEntrada(hoy.getTime());
 		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
-		when(estacionamientoService.validarPlacaVehiculo(registroTest,hoy)).thenReturn(Boolean.FALSE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.FALSE);
 		
-		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest,hoy);
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(false, ingresoValido);
 	}
@@ -159,9 +158,9 @@ public class RegistroVigilanteMockitoTest {
 		hoy.set(2018, Calendar.AUGUST, 20,1,00);
 		registroTest.setHoraEntrada(hoy.getTime());
 		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
-		when(estacionamientoService.validarPlacaVehiculo(registroTest,hoy)).thenReturn(Boolean.FALSE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.FALSE);
 		
-		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest,hoy);
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(false, ingresoValido);
 	}
@@ -176,9 +175,9 @@ public class RegistroVigilanteMockitoTest {
 		hoy.set(2018, Calendar.AUGUST, 21,1,00);
 		registroTest.setHoraEntrada(hoy.getTime());
 		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
-		when(estacionamientoService.validarPlacaVehiculo(registroTest,hoy)).thenReturn(Boolean.TRUE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
 		
-		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest,hoy);
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(true, ingresoValido);
 	}
@@ -193,9 +192,9 @@ public class RegistroVigilanteMockitoTest {
 		hoy.set(2018, Calendar.AUGUST, 21,1,00);
 		registroTest.setHoraEntrada(hoy.getTime());
 		when(estacionamientoService.validarCuposEstacionamiento(registroTest.getTipoVehiculo())).thenReturn(Boolean.TRUE);
-		when(estacionamientoService.validarPlacaVehiculo(registroTest,hoy)).thenReturn(Boolean.TRUE);
+		when(estacionamientoService.validarPlacaVehiculo(registroTest)).thenReturn(Boolean.TRUE);
 		
-		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest,hoy);
+		Boolean ingresoValido=registroVigilanteService.validarIngresoVehiculo(registroTest);
 		
 		assertEquals(true, ingresoValido);
 	}

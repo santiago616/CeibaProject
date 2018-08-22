@@ -1,6 +1,4 @@
 package com.ceiba.estacionamiento.estacionamiento.service;
-import java.util.Calendar;
-
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
 
 public interface IRegistroVigilanteService {
@@ -13,6 +11,6 @@ public interface IRegistroVigilanteService {
 	
 	public void actualizarRegistroFacturado(RegistroDTO registroVigilante);
 	
-	public Boolean validarIngresoVehiculo(RegistroDTO registroVigilanteDTO,Calendar hoy);
+	public Boolean validarIngresoVehiculo(RegistroDTO registroVigilanteDTO);
 
 }

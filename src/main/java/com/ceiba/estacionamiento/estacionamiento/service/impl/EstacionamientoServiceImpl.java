@@ -1,7 +1,5 @@
 package com.ceiba.estacionamiento.estacionamiento.service.impl;
 
-import java.util.Calendar;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +28,8 @@ public class EstacionamientoServiceImpl implements IEstacionamientoService {
 	}
 
 	@Override
-	public Boolean validarPlacaVehiculo(RegistroDTO registroVigilanteDTO,Calendar hoy) {
-		return registroParqueadero.validarPlacaDomingoLunes(registroVigilanteDTO,hoy);
+	public Boolean validarPlacaVehiculo(RegistroDTO registroVigilanteDTO) {
+		return registroParqueadero.validarPlacaDomingoLunes(registroVigilanteDTO);
 	}
 
 }
