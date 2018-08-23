@@ -29,7 +29,7 @@ public class RegistroVigilanteControllerTest {
 	@Test
     public void testGuardarRegistroEstacionamiento() throws Exception {
 		ResultMatcher ok = MockMvcResultMatchers.status()
-                .isCreated();
+                .isOk();
 		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.post("/registroVigilante/guardarRegistro")
         .contentType(MediaType.APPLICATION_JSON)
         .content("{\"placa\": \"SQ213\",\"cilindraje\": 600, \"horaEntrada\": \"2018-08-17T09:15\",\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
@@ -46,7 +46,7 @@ public class RegistroVigilanteControllerTest {
                 .isBadRequest();
 		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.post("/registroVigilante/guardarRegistro")
         .contentType(MediaType.APPLICATION_JSON)
-		.content("{\"placa\": \"\",\"cilindraje\": 600, \"horaEntrada\": \"2018-08-17T09:15\",\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
+        .content("{\"placa\": \"SQ213\",\"cilindraje\": 600, \"horaEntrada\": \"2018-08-17T09:15\",\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
 		
 		 this.mockMvc.perform(builder)
 		 .andExpect(bad)
@@ -69,8 +69,8 @@ public class RegistroVigilanteControllerTest {
 	@Test
     public void testFacturarRegistroEstacionamientoFailed() throws Exception {
 		ResultMatcher bad = MockMvcResultMatchers.status()
-                .isNotFound();
-		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.put("/registroVigilante/registro/{placa}","")
+                .isBadRequest();
+		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.put("/registroVigilante/registro/{placa}","SQ666")
         .contentType(MediaType.APPLICATION_JSON);
         
 		

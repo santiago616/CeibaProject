@@ -147,46 +147,5 @@ public class EstacionamientoTest {
 		assertEquals(new BigDecimal("12000.0"), tarifaParqueo);
 	}
 	
-	
-	@Test
-	public void testCuposDisponibleMoto() {
-		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
-		registro.setCilindraje(400);
-		
-		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(15), registro.getTipoVehiculo());
-		assertEquals(true, cuposDisponibles);
-	}
-	
-	
-	@Test
-	public void testCuposNoDisponibleMoto() {
-		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
-		registro.setCilindraje(400);
-		
-		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(20), registro.getTipoVehiculo());
-		assertEquals(false, cuposDisponibles);
-	}
-	
-	
-	@Test
-	public void testCuposDisponibleAuto() {
-		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.AUTO);
-		
-		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(15), registro.getTipoVehiculo());
-		assertEquals(true, cuposDisponibles);
-	}
-	
-	
-	@Test
-	public void testCuposNoDisponibleAuto() {
-		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.AUTO);
-		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(20), registro.getTipoVehiculo());
-		assertEquals(false, cuposDisponibles);
-	}
-	
 
 }

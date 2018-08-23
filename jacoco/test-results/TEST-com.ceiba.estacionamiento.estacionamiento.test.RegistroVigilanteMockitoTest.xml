@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ceiba.estacionamiento.estacionamiento.test.RegistroVigilanteMockitoTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-08-22T12:56:39" hostname="SANTIAGO-TORRES" time="0.268">
+  <properties/>
+  <testcase name="testValidarIngresoVehiculoestacionamiento_cupoDisponible" classname="com.ceiba.estacionamiento.estacionamiento.test.RegistroVigilanteMockitoTest" time="0.205"/>
+  <testcase name="testRegistrarVehiculoestacionamiento_vehiculoNoRegistrado" classname="com.ceiba.estacionamiento.estacionamiento.test.RegistroVigilanteMockitoTest" time="0.005"/>
+  <testcase name="testValidarIngresoVehiculoestacionamiento_cupoNoDisponible" classname="com.ceiba.estacionamiento.estacionamiento.test.RegistroVigilanteMockitoTest" time="0.004"/>
+  <testcase name="testRegistrarVehiculoestacionamiento_vehiculoRegistrado" classname="com.ceiba.estacionamiento.estacionamiento.test.RegistroVigilanteMockitoTest" time="0.051"/>
+  <testcase name="testValidarIngresoVehiculoestacionamiento_placaValida" classname="com.ceiba.estacionamiento.estacionamiento.test.RegistroVigilanteMockitoTest" time="0.001"/>
+  <testcase name="testValidarIngresoVehiculoestacionamiento_placaNoValida" classname="com.ceiba.estacionamiento.estacionamiento.test.RegistroVigilanteMockitoTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

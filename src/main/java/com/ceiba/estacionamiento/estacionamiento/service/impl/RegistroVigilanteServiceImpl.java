@@ -1,7 +1,9 @@
 package com.ceiba.estacionamiento.estacionamiento.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	Estacionamiento registroEstacionamiento = new Estacionamiento();
 
 	private final ModelMapper modelMapper = new ModelMapper();
+	
+	private List<String> listaErrores;
 
 	@Autowired
 	public RegistroVigilanteServiceImpl(RegistroVigilanteRepository registroVigilanteRepository,
@@ -35,32 +39,30 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 
 	@Override
 	@Transactional
-	public void almacenarRegistro(RegistroDTO registroVigilanteDTO) {
-		RegistroDTO vehiculoExistente = consultarVehiculoPorPlaca(registroVigilanteDTO.getPlaca());
-
-			if (vehiculoExistente == null
-					&& validarIngresoVehiculo(registroVigilanteDTO)) {
+	public RegistroDTO almacenarRegistro(RegistroDTO registroVigilanteDTO) {
+		
+			if (validarIngresoVehiculo(registroVigilanteDTO)) {
 				registroVigilanteDTO.setFacturado(Boolean.FALSE);
 				RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO, RegistroEntity.class);
-				registroVigilanteRepository.save(registroVigilante);
+				return   modelMapper.map(registroVigilanteRepository.save(registroVigilante),RegistroDTO.class);
 
-			} else {
-				// EL AUTO YA ESTA ALMACENADO
-			}
-		
+			} 
+		return null;
 	}
 
 	@Override
 	@Transactional
-	public void facturarVehiculo(String placa) {
+	public RegistroDTO facturarVehiculo(String placa) {
 		RegistroDTO registroVigilanteDTO=consultarVehiculoPorPlaca(placa);
 		if (registroVigilanteDTO != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());
 			BigDecimal tarifaTotalPorVehiculo = registroEstacionamiento.calcularValorParqueadero(registroVigilanteDTO);
 			registroVigilanteDTO.setTotalServicio(tarifaTotalPorVehiculo);
 			registroVigilanteDTO.setFacturado(Boolean.TRUE);
-			actualizarRegistroFacturado(registroVigilanteDTO);
+			return actualizarRegistroFacturado(registroVigilanteDTO);
+			
 		}
+		return null;
 	}
 
 	@Override
@@ -78,20 +80,41 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 
 	@Override
 	@Transactional
-	public void actualizarRegistroFacturado(RegistroDTO registroVigilanteDTO) {
+	public RegistroDTO actualizarRegistroFacturado(RegistroDTO registroVigilanteDTO) {
 		if (registroVigilanteDTO.getId() != null) {
 			RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO, RegistroEntity.class);
-			registroVigilanteRepository.save(registroVigilante);
-			registroVigilanteRepository.flush();
+			return modelMapper.map(registroVigilanteRepository.save(registroVigilante),RegistroDTO.class);
 		}
+		return null;
 
 	}
 
 	@Override
 	public Boolean validarIngresoVehiculo(RegistroDTO registroVigilanteDTO) {
+		RegistroDTO vehiculoExistente = consultarVehiculoPorPlaca(registroVigilanteDTO.getPlaca());
+		listaErrores=new ArrayList<>();
+		if(vehiculoExistente!=null) {
+			listaErrores.add("El vehiculo ya se encuentra registrado o la placa es invalida");
+		}
 		Boolean existenCuposDisponibles = estacionamientoService.validarCuposEstacionamiento(registroVigilanteDTO.getTipoVehiculo());
+		if(!existenCuposDisponibles) {
+			listaErrores.add("No existen cupos disponibles para este tipo de vehiculo.");
+		}
 		Boolean placaValida = estacionamientoService.validarPlacaVehiculo(registroVigilanteDTO);
-		return (existenCuposDisponibles && placaValida);
+		if(!placaValida) {
+			listaErrores.add("El vehiculo no se encuentra autorizado para ingresar.");
+		}
+		return (listaErrores.isEmpty());
+	}
+	
+	
+
+	public List<String> getListaErrores() {
+		return listaErrores;
+	}
+
+	public void setListaErrores(List<String> listaErrores) {
+		this.listaErrores = listaErrores;
 	}
 
 }
