@@ -1,0 +1,82 @@
+<div class="ui-g">
+
+    <div class="ui-g-6">
+        <p-panel header=" Registro Vehiculo">
+            <div class="container">
+                <h1>Ingreso vehiculo</h1>
+                <div class="form-group">
+                    <label for="placa">Placa</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cilindraje">Cilindraje CC</label>
+                    <input type="text" class="form-control" id="alterEgo">
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoVehiculo">Tipo Vehiculo</label>
+                    <p-dropdown [options]="tiposVehiculo" [(ngModel)]="selectTipoVehiculo" [autoWidth]="false"></p-dropdown>
+                </div>
+
+                <button type="submit" class="btn btn-success" style="background-color: dodgerblue">Submit</button>
+
+
+            </div>
+        </p-panel>
+    </div>
+    <div class="ui-g-6">
+        <p-panel header=" Facturar Vehiculo">
+            <div class="container">
+                <h1>Salida vehiculo</h1>
+                <div class="form-group">
+                    <label for="name">Placa</label>
+                    <input type="text" class="form-control" id="name" required >
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-info">Buscar vehiculo</button>
+                </div>
+                <div class="form-group">
+                        <h4>Informacion del vehiculo</h4>
+                        <table class="table table-bordered table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Placa</th>
+                                    <th>Fecha entrada</th>
+                                    <th>Cilindraje</th>
+                                    <th>Tiempo</th>
+                                    <th>Estado</th>
+                                    <th>Cilindraje</th>
+                                    <th>Placa</th>
+                                    <th>Vehiculo</th>
+                                    <th>Facturar </th>
+                          
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <!--<tr *ngFor="let registroParqueo of registrosParqueo">
+                                    <td>{{ registroParqueo.fechaEntrada }}</td>
+                                    <td>{{ registroParqueo.fechaSalida}}</td>
+                                    <td>{{ registroParqueo.valorFacturado }}</td>
+                                    <td>{{ registroParqueo.tiempo }}</td>
+                                    <td>{{ registroParqueo.estadoRegistroParqueo }}</td>
+                                    <td>{{ registroParqueo.vehiculo.cilindraje }}</td>
+                                    <td>{{ registroParqueo.vehiculo.placa }}</td>
+                                    <td>{{ registroParqueo.vehiculo.tipoVehiculo }}</td>
+                                    <td>
+                                      <button type="button" name="cobrar"class="btn btn-dark">Cobrar</button>
+                                    </td>
+                                  </tr>
+                                </tbody>---->
+                              </table>
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+
+
+            </div>
+        </p-panel>
+    </div>
+
+
+</div>
