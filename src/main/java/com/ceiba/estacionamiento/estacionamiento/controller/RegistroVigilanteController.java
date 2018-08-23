@@ -35,7 +35,7 @@ public class RegistroVigilanteController {
 			} else {
 				String retornarErrores = "";
 				for (int i = 0; i < listaErrores.size(); i++) {
-					retornarErrores =  retornarErrores+listaErrores.get(i)+" " ;
+					retornarErrores =   new StringBuilder().append(listaErrores.get(i)).append(" ").toString() ;
 				}
 				HttpHeaders headers = new HttpHeaders();
 				headers.set("errores-estacionamiento", retornarErrores);
