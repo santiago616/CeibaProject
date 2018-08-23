@@ -2,11 +2,9 @@ package com.ceiba.estacionamiento.estacionamiento.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
-import com.ceiba.estacionamiento.estacionamiento.entity.RegistroEntity;
 import com.ceiba.estacionamiento.estacionamiento.service.IRegistroVigilanteService;
 
 @RestController
@@ -38,7 +35,7 @@ public class RegistroVigilanteController {
 			} else {
 				String retornarErrores = "";
 				for (int i = 0; i < listaErrores.size(); i++) {
-					retornarErrores +=  listaErrores.get(i)+" " ;
+					retornarErrores =  retornarErrores+listaErrores.get(i)+" " ;
 				}
 				HttpHeaders headers = new HttpHeaders();
 				headers.set("errores-estacionamiento", retornarErrores);
