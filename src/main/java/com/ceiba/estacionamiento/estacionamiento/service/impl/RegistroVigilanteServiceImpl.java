@@ -42,6 +42,9 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	public RegistroDTO almacenarRegistro(RegistroDTO registroVigilanteDTO) {
 		
 			if (validarIngresoVehiculo(registroVigilanteDTO)) {
+				if(registroVigilanteDTO.getHoraEntrada()==null) {
+					registroVigilanteDTO.setHoraEntrada(new Date());
+				}
 				registroVigilanteDTO.setFacturado(Boolean.FALSE);
 				RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO, RegistroEntity.class);
 				return   modelMapper.map(registroVigilanteRepository.save(registroVigilante),RegistroDTO.class);
@@ -56,6 +59,8 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 		RegistroDTO registroVigilanteDTO=consultarVehiculoPorPlaca(placa);
 		if (registroVigilanteDTO != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());
+			int[] tiempoTotal=registroEstacionamiento.calcularTiempoParqueado(registroVigilanteDTO);
+			registroVigilanteDTO.setTiempoTotal(tiempoTotal);
 			BigDecimal tarifaTotalPorVehiculo = registroEstacionamiento.calcularValorParqueadero(registroVigilanteDTO);
 			registroVigilanteDTO.setTotalServicio(tarifaTotalPorVehiculo);
 			registroVigilanteDTO.setFacturado(Boolean.TRUE);

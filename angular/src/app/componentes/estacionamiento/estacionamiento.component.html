@@ -1,78 +1,74 @@
-<div class="ui-g">
+<div class="ui-g" >
 
-    <div class="ui-g-6">
+    <div class="ui-g-6" >
         <p-panel header=" Registro Vehiculo">
-            <div class="container">
+            <div class="container"  style="height: 450px;">
                 <h1>Ingreso vehiculo</h1>
                 <div class="form-group">
                     <label for="placa">Placa</label>
-                    <input type="text" class="form-control" id="name" required>
+                    <input type="text" class="form-control" id="name" required  [(ngModel)]="registroNuevo.placa">
                 </div>
+
+                <div class="form-group">
+                        <label for="tipoVehiculo">Tipo Vehiculo</label>
+                        <p-dropdown [options]="tiposVehiculo" [(ngModel)]="registroNuevo.tipoVehiculo" [autoWidth]="false"
+                        ></p-dropdown>
+                    </div>
 
                 <div class="form-group">
                     <label for="cilindraje">Cilindraje CC</label>
-                    <input type="text" class="form-control" id="alterEgo">
+                    <input type="text" class="form-control" id="alterEgo"  [(ngModel)]="registroNuevo.cilindraje"
+                    [disabled]="registroNuevo.tipoVehiculo=='AUTO'">
                 </div>
 
-                <div class="form-group">
-                    <label for="tipoVehiculo">Tipo Vehiculo</label>
-                    <p-dropdown [options]="tiposVehiculo" [(ngModel)]="selectTipoVehiculo" [autoWidth]="false"></p-dropdown>
-                </div>
+               
 
-                <button type="submit" class="btn btn-success" style="background-color: dodgerblue">Submit</button>
+                <button type="submit" class="btn btn-success" style="background-color: dodgerblue" (click)="agregarRegistro()">Crear registro</button>
 
 
             </div>
         </p-panel>
     </div>
-    <div class="ui-g-6">
+    <div class="ui-g-6" >
         <p-panel header=" Facturar Vehiculo">
-            <div class="container">
+            <div class="container" style="height: 450px;">
                 <h1>Salida vehiculo</h1>
                 <div class="form-group">
                     <label for="name">Placa</label>
-                    <input type="text" class="form-control" id="name" required >
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="placa" >
                     <br>
-                    <br>
-                    <button type="submit" class="btn btn-info">Buscar vehiculo</button>
+                    <button type="submit" class="btn btn-info" style="background-color: orange"(click)="obtenerRegistroPorPlaca()"> Buscar vehiculo</button>
                 </div>
                 <div class="form-group">
-                        <h4>Informacion del vehiculo</h4>
-                        <table class="table table-bordered table-striped">
-                                <thead>
-                                  <tr>
+                        <h3>Informacion del vehiculo</h3>
+                        <p-table [value]="registros">
+                            <ng-template pTemplate="header">
+                                <tr>
                                     <th>Placa</th>
-                                    <th>Fecha entrada</th>
+                                    <th>Tipo vehiculo</th>
                                     <th>Cilindraje</th>
-                                    <th>Tiempo</th>
+                                    <th style="width: 130px">Fecha entrada</th>
+                                    <th style="width: 130px">Fecha Salida</th>
                                     <th>Estado</th>
-                                    <th>Cilindraje</th>
-                                    <th>Placa</th>
-                                    <th>Vehiculo</th>
-                                    <th>Facturar </th>
-                          
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <!--<tr *ngFor="let registroParqueo of registrosParqueo">
-                                    <td>{{ registroParqueo.fechaEntrada }}</td>
-                                    <td>{{ registroParqueo.fechaSalida}}</td>
-                                    <td>{{ registroParqueo.valorFacturado }}</td>
-                                    <td>{{ registroParqueo.tiempo }}</td>
-                                    <td>{{ registroParqueo.estadoRegistroParqueo }}</td>
-                                    <td>{{ registroParqueo.vehiculo.cilindraje }}</td>
-                                    <td>{{ registroParqueo.vehiculo.placa }}</td>
-                                    <td>{{ registroParqueo.vehiculo.tipoVehiculo }}</td>
-                                    <td>
-                                      <button type="button" name="cobrar"class="btn btn-dark">Cobrar</button>
-                                    </td>
-                                  </tr>
-                                </tbody>---->
-                              </table>
+                                    <th>Valor total</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-registro>
+                                <tr>
+                                    <td>{{registro.placa}}</td>
+                                    <td>{{registro.tipoVehiculo}}</td>
+                                    <td>{{registro.cilindraje}} CC</td>
+                                    <td style="width: 130px">{{registro.horaEntrada | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                    <td style="width: 130px">{{registro.horaSalida | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                    <td>{{registro.facturado}}</td>
+                                    <td>{{registro.totalServicio}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                 </div>
 
-                <button type="submit" class="btn btn-success">Submit</button>
-
+                <button type="submit" class="btn btn-success" (click)="facturarRegistro()">Facturar</button>
+                <button type="submit" class="btn btn-dark"  style="background-color: red;margin-left: 100px">Cancelar</button>
 
             </div>
         </p-panel>
@@ -80,3 +76,9 @@
 
 
 </div>
+
+<div class="ui-g">
+        <div class="ui-g-12" style="background-color: peachpuff;height: 200px;">
+                <p-messages [(value)]="msgs"></p-messages>
+        </div>
+    </div>

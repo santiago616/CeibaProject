@@ -23,6 +23,8 @@ public class RegistroDTO {
 		
 		private String tipoVehiculo;
 		
+		private int[] tiempoTotal;
+		
 
 		public RegistroDTO() {
 			super();
@@ -95,6 +97,21 @@ public class RegistroDTO {
 		public void setTipoVehiculo(String tipo) {
 			this.tipoVehiculo = tipo;
 		}
+
+
+
+		public int[] getTiempoTotal() {
+			return tiempoTotal;
+		}
+
+
+
+		public void setTiempoTotal(int[] tiempoTotal) {
+			this.tiempoTotal = tiempoTotal;
+		}
+
+
+
 		
 		
 	

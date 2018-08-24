@@ -7,6 +7,10 @@ import {PanelModule} from 'primeng/panel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DropdownModule} from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
+import {TableModule} from 'primeng/table';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import { HttpClientModule } from '../../node_modules/@angular/common/http';
 const routes: Routes = [
   { path: 'estacionamiento', component: EstacionamientoComponent }
 ];
@@ -18,7 +22,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,RouterModule.forRoot(routes),PanelModule,BrowserAnimationsModule,
-    DropdownModule,FormsModule
+    DropdownModule,FormsModule,TableModule,MessagesModule,MessageModule,HttpClientModule 
   ],
   exports: [RouterModule],
   providers: [],

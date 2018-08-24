@@ -36,16 +36,15 @@ public class Estacionamiento {
 
 
 	public BigDecimal calcularValorParqueadero(RegistroDTO registroVigilante) {
-		double[] tiempoTotal = calcularTiempoParqueado(registroVigilante);
 
-		return calcularTarifaTipoVehiculo(registroVigilante, tiempoTotal);
+		return calcularTarifaTipoVehiculo(registroVigilante,registroVigilante.getTiempoTotal());
 	}
 
-	public double[] calcularTiempoParqueado(RegistroDTO registroVigilante) {
+	public int[] calcularTiempoParqueado(RegistroDTO registroVigilante) {
 		Long diffInMillies = Math
 				.abs(registroVigilante.getHoraSalida().getTime() - registroVigilante.getHoraEntrada().getTime());
 		Long diff = TimeUnit.HOURS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-		double[] tiempoTotal = new double[2];
+		int[] tiempoTotal = new int[2];
 		int dias = 0;
 		int horas = 0;
 
@@ -70,7 +69,7 @@ public class Estacionamiento {
 		return tiempoTotal;
 	}
 
-	public BigDecimal calcularTarifaTipoVehiculo(RegistroDTO registroVigilante, double[] tiempoTotal) {
+	public BigDecimal calcularTarifaTipoVehiculo(RegistroDTO registroVigilante, int[] tiempoTotal) {
 		BigDecimal totalTarifa = new BigDecimal(0);
 		if (registroVigilante.getTipoVehiculo().equalsIgnoreCase(MOTO)) {
 			totalTarifa = VALOR_DIA_MOTO.multiply(BigDecimal.valueOf(tiempoTotal[0])).add(VALOR_HORA_MOTO.multiply(BigDecimal.valueOf(tiempoTotal[1])));
