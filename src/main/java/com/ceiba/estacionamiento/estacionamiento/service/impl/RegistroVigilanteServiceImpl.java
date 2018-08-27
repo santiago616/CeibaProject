@@ -64,7 +64,7 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	public RegistroDTO facturarVehiculo(String placa) {
 		RegistroDTO registroVigilanteDTO= new RegistroDTO();
 		registroVigilanteDTO=consultarVehiculoPorPlaca(placa);
-		if (registroVigilanteDTO != null) {
+		if (registroVigilanteDTO.getId() != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());
 			int[] tiempoTotal=registroEstacionamiento.calcularTiempoParqueado(registroVigilanteDTO);
 			registroVigilanteDTO.setTiempoTotal(tiempoTotal);

@@ -1,9 +1,7 @@
 package com.ceiba.estacionamiento.estacionamiento.test;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.util.Calendar;
@@ -16,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
 import com.ceiba.estacionamiento.estacionamiento.dto.VehiculoDTO;
-import com.ceiba.estacionamiento.estacionamiento.entity.RegistroEntity;
 import com.ceiba.estacionamiento.estacionamiento.repository.ParametrizacionRepository;
 import com.ceiba.estacionamiento.estacionamiento.repository.RegistroVigilanteRepository;
 import com.ceiba.estacionamiento.estacionamiento.service.IEstacionamientoService;
@@ -42,38 +39,8 @@ public class RegistroVigilanteMockitoTest {
 		MockitoAnnotations.initMocks(this);
 		registroVigilanteService= new RegistroVigilanteServiceImpl(registroRepository, estacionamientoService,parametrizacionRepository);
 	}
-	//no
-	@Test
-	public void testRegistrarVehiculoestacionamiento_vehiculoNoRegistrado() {
-		RegistroDTO registroTest= new RegistroDTO();
-		registroTest.setVehiculo(new VehiculoDTO());
-		registroTest.getVehiculo().setPlaca("PNG121");
-		registroTest.getVehiculo().setTipoVehiculo("auto");
-		
-		when(registroRepository.buscarRegistroPorPlaca(registroTest.getVehiculo().getPlaca())).thenReturn(null);
-		
-		RegistroDTO ingresoValido=registroVigilanteService.consultarVehiculoPorPlaca(registroTest.getVehiculo().getPlaca());
-		
-		assertThat(ingresoValido,nullValue());
-	
-	}
-	
-	
-	@Test
-	public void testRegistrarVehiculoestacionamiento_vehiculoRegistrado() {
-		RegistroDTO registroTest= new RegistroDTO();
-		registroTest.setVehiculo(new VehiculoDTO());
-		registroTest.getVehiculo().setPlaca("PNG121");
-		registroTest.getVehiculo().setTipoVehiculo("auto");
-		
-		when(registroRepository.buscarRegistroPorPlaca(registroTest.getVehiculo().getPlaca())).thenReturn(new RegistroEntity());
-		
-		RegistroDTO ingresoValido=registroVigilanteService.consultarVehiculoPorPlaca(registroTest.getVehiculo().getPlaca());
-		
-		assertThat(ingresoValido,notNullValue());
-	
-	}
-	
+
+
 	@Test
 	public void testValidarIngresoVehiculoestacionamiento_cupoNoDisponible() {
 	

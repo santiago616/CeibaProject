@@ -82,13 +82,14 @@ public class RegistroVigilanteControllerTest {
 	
 	@Test
     public void testConsultarRegistroEstacionamiento() throws Exception {
-		ResultMatcher ok = MockMvcResultMatchers.status()
-                .isOk();
-		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.get("/registroVigilante/registro/{placa}","SQ212")
+//		ResultMatcher ok = MockMvcResultMatchers.status()
+//                .isOk();
+		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.get("/registroVigilante/registro/{placa}","SQ282")
         .contentType(MediaType.APPLICATION_JSON);
         
 		
 		 this.mockMvc.perform(builder)
+		 //.andExpect(ok)
          .andDo(print());
 	}
 	
