@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity(name = "registro")
 public class RegistroEntity implements Serializable {
@@ -22,9 +25,9 @@ public class RegistroEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String placa;
-
-	private int cilindraje;
+	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "vehiculo_id")
+	private VehiculoEntity vehiculo;
 
 	private Date horaEntrada;
 
@@ -34,7 +37,6 @@ public class RegistroEntity implements Serializable {
 
 	private BigDecimal totalServicio;
 
-	private String tipoVehiculo;
 
 	public RegistroEntity() {
 		super();
@@ -48,21 +50,7 @@ public class RegistroEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getPlaca() {
-		return placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
-
-	public int getCilindraje() {
-		return cilindraje;
-	}
-
-	public void setCilindraje(int cilindraje) {
-		this.cilindraje = cilindraje;
-	}
+	
 
 	public Date getHoraEntrada() {
 		return horaEntrada;
@@ -96,19 +84,14 @@ public class RegistroEntity implements Serializable {
 		this.totalServicio = totalServicio;
 	}
 
-	public String getTipoVehiculo() {
-		return tipoVehiculo;
+	public VehiculoEntity getVehiculo() {
+		return vehiculo;
 	}
 
-	public void setTipoVehiculo(String tipoVehiculo) {
-		this.tipoVehiculo = tipoVehiculo;
+	public void setVehiculo(VehiculoEntity vehiculo) {
+		this.vehiculo = vehiculo;
 	}
 
-	@Override
-	public String toString() {
-		return "Registro [id=" + id + ", placa=" + placa + ", cilindraje=" + cilindraje + ", horaEntrada=" + horaEntrada
-				+ ", horaSalida=" + horaSalida + ", facturado=" + facturado + ", totalServicio=" + totalServicio
-				+ ", tipoVehiculo=" + tipoVehiculo + "]";
-	}
+
 
 }

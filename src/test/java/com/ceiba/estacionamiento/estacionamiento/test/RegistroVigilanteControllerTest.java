@@ -32,7 +32,7 @@ public class RegistroVigilanteControllerTest {
                 .isOk();
 		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.post("/registroVigilante/guardarRegistro")
         .contentType(MediaType.APPLICATION_JSON)
-        .content("{\"placa\": \"SQ213\",\"cilindraje\": 600, \"horaEntrada\": \"2018-08-17T09:15\",\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
+        .content("{\"vehiculo\":{\"placa\":\"SDDD\",\"tipoVehiculo\":\"AUTO\",\"cilindraje\":\"22333\"},\"horaEntrada\":\"2018-08-27T19:06:19.756Z\"}");
 		
 		
 		 this.mockMvc.perform(builder)
@@ -46,7 +46,7 @@ public class RegistroVigilanteControllerTest {
                 .isBadRequest();
 		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.post("/registroVigilante/guardarRegistro")
         .contentType(MediaType.APPLICATION_JSON)
-        .content("{\"placa\": \"SQ213\",\"cilindraje\": 600, \"horaEntrada\": \"2018-08-17T09:15\",\"horaSalida\": null,\"facturado\": false,\"totalServicio\": null,\"tipoVehiculo\":\"auto\"}");
+        .content("{\"vehiculo\":{\"placa\":\"SDDD\",\"tipoVehiculo\":\"AUTO\",\"cilindraje\":\"22333\"},\"horaEntrada\":\"2018-08-27T19:06:19.756Z\"}");
 		
 		 this.mockMvc.perform(builder)
 		 .andExpect(bad)
@@ -57,7 +57,7 @@ public class RegistroVigilanteControllerTest {
     public void testFacturarRegistroEstacionamiento() throws Exception {
 		ResultMatcher ok = MockMvcResultMatchers.status()
                 .isOk();
-		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.put("/registroVigilante/registro/{placa}","SQ212")
+		MockHttpServletRequestBuilder builder =MockMvcRequestBuilders.put("/registroVigilante/registro/{placa}","SQ282")
         .contentType(MediaType.APPLICATION_JSON);
         
 		

@@ -8,10 +8,8 @@ public class RegistroDTO {
 
 
 		private Long id;
-
-		private String placa;
 		
-		private int cilindraje;
+		private VehiculoDTO vehiculo;
 		
 		private Date horaEntrada;
 		
@@ -20,8 +18,6 @@ public class RegistroDTO {
 		private Boolean facturado;
 		
 		private BigDecimal totalServicio;
-		
-		private String tipoVehiculo;
 		
 		private int[] tiempoTotal;
 		
@@ -40,21 +36,7 @@ public class RegistroDTO {
 			this.id = id;
 		}
 
-		public String getPlaca() {
-			return placa;
-		}
-
-		public void setPlaca(String placa) {
-			this.placa = placa;
-		}
-
-		public int getCilindraje() {
-			return cilindraje;
-		}
-
-		public void setCilindraje(int cilindraje) {
-			this.cilindraje = cilindraje;
-		}
+		
 
 		public Date getHoraEntrada() {
 			return horaEntrada;
@@ -62,14 +44,6 @@ public class RegistroDTO {
 
 		public void setHoraEntrada(Date horaEntrada) {
 			this.horaEntrada = horaEntrada;
-		}
-
-		public Date getHoraSalida() {
-			return horaSalida;
-		}
-
-		public void setHoraSalida(Date horaSalida) {
-			this.horaSalida = horaSalida;
 		}
 
 		public Boolean getFacturado() {
@@ -89,16 +63,6 @@ public class RegistroDTO {
 		}
 
 
-		public String getTipoVehiculo() {
-			return tipoVehiculo;
-		}
-
-
-		public void setTipoVehiculo(String tipo) {
-			this.tipoVehiculo = tipo;
-		}
-
-
 
 		public int[] getTiempoTotal() {
 			return tiempoTotal;
@@ -108,6 +72,30 @@ public class RegistroDTO {
 
 		public void setTiempoTotal(int[] tiempoTotal) {
 			this.tiempoTotal = tiempoTotal;
+		}
+
+
+
+		public VehiculoDTO getVehiculo() {
+			return vehiculo;
+		}
+
+
+
+		public void setVehiculo(VehiculoDTO vehiculo) {
+			this.vehiculo = vehiculo;
+		}
+
+
+
+		public Date getHoraSalida() {
+			return horaSalida;
+		}
+
+
+
+		public void setHoraSalida(Date horaSalida) {
+			this.horaSalida = horaSalida;
 		}
 
 

@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ceiba.estacionamiento.estacionamiento.dominio.Estacionamiento;
+import com.ceiba.estacionamiento.estacionamiento.dto.ParametrizacionDTO;
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
+import com.ceiba.estacionamiento.estacionamiento.entity.ParametrizacionEntity;
 import com.ceiba.estacionamiento.estacionamiento.entity.RegistroEntity;
+import com.ceiba.estacionamiento.estacionamiento.repository.ParametrizacionRepository;
 import com.ceiba.estacionamiento.estacionamiento.repository.RegistroVigilanteRepository;
 import com.ceiba.estacionamiento.estacionamiento.service.IEstacionamientoService;
 import com.ceiba.estacionamiento.estacionamiento.service.IRegistroVigilanteService;
@@ -21,6 +24,8 @@ import com.ceiba.estacionamiento.estacionamiento.service.IRegistroVigilanteServi
 public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 
 	RegistroVigilanteRepository registroVigilanteRepository;
+	
+	ParametrizacionRepository parametrizacionRepository;
 
 	IEstacionamientoService estacionamientoService;
 
@@ -32,15 +37,16 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 
 	@Autowired
 	public RegistroVigilanteServiceImpl(RegistroVigilanteRepository registroVigilanteRepository,
-			IEstacionamientoService estacionamientoService) {
+			IEstacionamientoService estacionamientoService,ParametrizacionRepository parametrizacionRepository) {
 		this.registroVigilanteRepository = registroVigilanteRepository;
 		this.estacionamientoService = estacionamientoService;
+		this.parametrizacionRepository=parametrizacionRepository;
 	}
 
 	@Override
 	@Transactional
 	public RegistroDTO almacenarRegistro(RegistroDTO registroVigilanteDTO) {
-		
+		RegistroDTO registroResult=new RegistroDTO();
 			if (validarIngresoVehiculo(registroVigilanteDTO)) {
 				if(registroVigilanteDTO.getHoraEntrada()==null) {
 					registroVigilanteDTO.setHoraEntrada(new Date());
@@ -50,58 +56,64 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 				return   modelMapper.map(registroVigilanteRepository.save(registroVigilante),RegistroDTO.class);
 
 			} 
-		return null;
+		return registroResult;
 	}
 
 	@Override
 	@Transactional
 	public RegistroDTO facturarVehiculo(String placa) {
-		RegistroDTO registroVigilanteDTO=consultarVehiculoPorPlaca(placa);
+		RegistroDTO registroVigilanteDTO= new RegistroDTO();
+		registroVigilanteDTO=consultarVehiculoPorPlaca(placa);
 		if (registroVigilanteDTO != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());
 			int[] tiempoTotal=registroEstacionamiento.calcularTiempoParqueado(registroVigilanteDTO);
 			registroVigilanteDTO.setTiempoTotal(tiempoTotal);
-			BigDecimal tarifaTotalPorVehiculo = registroEstacionamiento.calcularValorParqueadero(registroVigilanteDTO);
+			ParametrizacionDTO parametrizacion=consultarParametrosTipoVehiculo(registroVigilanteDTO.getVehiculo().getTipoVehiculo());
+			BigDecimal tarifaTotalPorVehiculo = registroEstacionamiento.calcularValorParqueadero(registroVigilanteDTO,parametrizacion);
 			registroVigilanteDTO.setTotalServicio(tarifaTotalPorVehiculo);
 			registroVigilanteDTO.setFacturado(Boolean.TRUE);
 			return actualizarRegistroFacturado(registroVigilanteDTO);
 			
 		}
-		return null;
+		return registroVigilanteDTO;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public RegistroDTO consultarVehiculoPorPlaca(String placa) {
+		RegistroDTO registroResult=new RegistroDTO();
 		if (placa != null) {
 			RegistroEntity registroVigilante = registroVigilanteRepository.buscarRegistroPorPlaca(placa);
 			if (registroVigilante != null) {
 				
-				return modelMapper.map(registroVigilante, RegistroDTO.class);
+				registroResult=modelMapper.map(registroVigilante, RegistroDTO.class);
+				return registroResult;
 			}
 		}
-		return null;
+		return registroResult;
 	}
 
 	@Override
 	@Transactional
 	public RegistroDTO actualizarRegistroFacturado(RegistroDTO registroVigilanteDTO) {
+		RegistroDTO registroResult=new RegistroDTO();
 		if (registroVigilanteDTO.getId() != null) {
 			RegistroEntity registroVigilante = modelMapper.map(registroVigilanteDTO, RegistroEntity.class);
-			return modelMapper.map(registroVigilanteRepository.save(registroVigilante),RegistroDTO.class);
+			registroResult=modelMapper.map(registroVigilanteRepository.save(registroVigilante),RegistroDTO.class);
+			return registroResult;
 		}
-		return null;
+		return registroResult;
 
 	}
 
 	@Override
 	public Boolean validarIngresoVehiculo(RegistroDTO registroVigilanteDTO) {
-		RegistroDTO vehiculoExistente = consultarVehiculoPorPlaca(registroVigilanteDTO.getPlaca());
+		RegistroDTO vehiculoExistente = consultarVehiculoPorPlaca(registroVigilanteDTO.getVehiculo().getPlaca());
 		listaErrores=new ArrayList<>();
-		if(vehiculoExistente!=null) {
+		if(vehiculoExistente.getId()!=null) {
 			listaErrores.add("El vehiculo ya se encuentra registrado o la placa es invalida");
 		}
-		Boolean existenCuposDisponibles = estacionamientoService.validarCuposEstacionamiento(registroVigilanteDTO.getTipoVehiculo());
+		Boolean existenCuposDisponibles = estacionamientoService.validarCuposEstacionamiento(registroVigilanteDTO.getVehiculo().getTipoVehiculo());
 		if(!existenCuposDisponibles) {
 			listaErrores.add("No existen cupos disponibles para este tipo de vehiculo.");
 		}
@@ -113,6 +125,20 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	}
 	
 	
+	@Override
+	@Transactional(readOnly = true)
+	public ParametrizacionDTO consultarParametrosTipoVehiculo(String tipoVehiculo) {
+		ParametrizacionDTO parametrizacion=new ParametrizacionDTO();
+		if (tipoVehiculo != null) {
+			ParametrizacionEntity parametros = parametrizacionRepository.buscarParametrizacionPorTipoVehiculo(tipoVehiculo);
+			if (parametros != null) {
+				parametrizacion=modelMapper.map(parametros, ParametrizacionDTO.class);
+				return parametrizacion;
+			}
+		}
+		return parametrizacion;
+	}
+	
 
 	public List<String> getListaErrores() {
 		return listaErrores;
@@ -121,5 +147,6 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	public void setListaErrores(List<String> listaErrores) {
 		this.listaErrores = listaErrores;
 	}
+
 
 }

@@ -10,7 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ceiba.estacionamiento.estacionamiento.dominio.Estacionamiento;
+import com.ceiba.estacionamiento.estacionamiento.dto.ParametrizacionDTO;
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
+import com.ceiba.estacionamiento.estacionamiento.dto.VehiculoDTO;
 
 public class EstacionamientoTest {
 	
@@ -25,136 +27,185 @@ public class EstacionamientoTest {
 	@Test
 	public void testCalcularAuto_diaTresHoras() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.AUTO);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.AUTO);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
+		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
+		parametrizacionDTO.setTipoVehiculo(Estacionamiento.AUTO);
+		parametrizacionDTO.setCupoVehiculo(20);
+		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_CARRO);
+		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_CARRO);
 		
 		fechaEntrada.set(2018, Calendar.AUGUST,21,2,55);
 		fechaSalida.set(2018, Calendar.AUGUST,22,5,55);
 		registro.setHoraEntrada(fechaEntrada.getTime());
 		registro.setHoraSalida(fechaSalida.getTime());
-		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
-		assertEquals(new BigDecimal("11000.0"), tarifaParqueo);
+		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro,parametrizacionDTO);
+		assertEquals(new BigDecimal("11000"), tarifaParqueo);
 	}
 	
 	@Test
 	public void testCalcularMoto_diaTresHoras() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.MOTO);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
+		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
+		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
+		parametrizacionDTO.setCupoVehiculo(20);
+		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
+		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
 		fechaEntrada.set(2018, Calendar.AUGUST,21,2,55);
 		fechaSalida.set(2018, Calendar.AUGUST,22,5,55);
 		registro.setHoraEntrada(fechaEntrada.getTime());
 		registro.setHoraSalida(fechaSalida.getTime());
-		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
-		assertEquals(new BigDecimal("5500.0"), tarifaParqueo);
+		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro,parametrizacionDTO);
+		assertEquals(new BigDecimal("5500"), tarifaParqueo);
 	}
 	
 	@Test
 	public void testCalcularMoto_diezHorasSeisCiencuentaCC() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
-		registro.setCilindraje(650);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.MOTO);
+		registro.getVehiculo().setCilindraje(650);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
+		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
+		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
+		parametrizacionDTO.setCupoVehiculo(20);
+		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
+		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
 		fechaEntrada.set(2018, Calendar.AUGUST,21,8,00);
 		fechaSalida.set(2018, Calendar.AUGUST,21,18,00);
 		registro.setHoraEntrada(fechaEntrada.getTime());
 		registro.setHoraSalida(fechaSalida.getTime());
-		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
-		assertEquals(new BigDecimal("6000.0"), tarifaParqueo);
+		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro,parametrizacionDTO);
+		assertEquals(new BigDecimal("6000"), tarifaParqueo);
 	}
 	
 	@Test
 	public void testCalcularMoto_diezHorasMenoCilindraje() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
-		registro.setCilindraje(500);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.MOTO);
+		registro.getVehiculo().setCilindraje(500);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
+		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
+		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
+		parametrizacionDTO.setCupoVehiculo(20);
+		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
+		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
 		fechaEntrada.set(2018, Calendar.AUGUST,21,8,00);
 		fechaSalida.set(2018, Calendar.AUGUST,21,18,00);
 		registro.setHoraEntrada(fechaEntrada.getTime());
 		registro.setHoraSalida(fechaSalida.getTime());
-		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
-		assertEquals(new BigDecimal("4000.0"), tarifaParqueo);
+		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro,parametrizacionDTO);
+		assertEquals(new BigDecimal("4000"), tarifaParqueo);
 	}
 	
 	@Test
 	public void testCalcularAuto_dosDiasNueveHoras() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.AUTO);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.AUTO);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
+		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
+		parametrizacionDTO.setTipoVehiculo(Estacionamiento.AUTO);
+		parametrizacionDTO.setCupoVehiculo(20);
+		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_CARRO);
+		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_DIA_CARRO);
 		
 		fechaEntrada.set(2018, Calendar.AUGUST,21,9,00);
 		fechaSalida.set(2018, Calendar.AUGUST,23,18,00);
 		registro.setHoraEntrada(fechaEntrada.getTime());
 		registro.setHoraSalida(fechaSalida.getTime());
-		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
-		assertEquals(new BigDecimal("24000.0"), tarifaParqueo);
+		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro,parametrizacionDTO);
+		assertEquals(new BigDecimal("24000"), tarifaParqueo);
 	}
 	
 	@Test
 	public void testCalcularAuto_dosDiasOchoHoras() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.AUTO);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.AUTO);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
+		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
+		parametrizacionDTO.setTipoVehiculo(Estacionamiento.AUTO);
+		parametrizacionDTO.setCupoVehiculo(20);
+		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_CARRO);
+		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_CARRO);
 		
 		fechaEntrada.set(2018, Calendar.AUGUST,21,9,00);
 		fechaSalida.set(2018, Calendar.AUGUST,23,17,00);
 		registro.setHoraEntrada(fechaEntrada.getTime());
 		registro.setHoraSalida(fechaSalida.getTime());
-		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
-		assertEquals(new BigDecimal("24000.0"), tarifaParqueo);
+		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro,parametrizacionDTO);
+		assertEquals(new BigDecimal("24000"), tarifaParqueo);
 	}
 	
 	@Test
 	public void testCalcularMoto_dosDiasNueveHorasSeisCientosCC() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
-		registro.setCilindraje(600);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.MOTO);
+		registro.getVehiculo().setCilindraje(600);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
+		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
+		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
+		parametrizacionDTO.setCupoVehiculo(20);
+		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
+		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
 		fechaEntrada.set(2018, Calendar.AUGUST,21,9,00);
 		fechaSalida.set(2018, Calendar.AUGUST,23,18,00);
 		registro.setHoraEntrada(fechaEntrada.getTime());
 		registro.setHoraSalida(fechaSalida.getTime());
-		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
-		assertEquals(new BigDecimal("14000.0"), tarifaParqueo);
+		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro,parametrizacionDTO);
+		assertEquals(new BigDecimal("14000"), tarifaParqueo);
 	}
 	
 	
 	@Test
 	public void testCalcularMoto_dosDiasOchoHorasCuatroCientosCC() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
-		registro.setCilindraje(400);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.MOTO);
+		registro.getVehiculo().setCilindraje(400);
 		Calendar fechaEntrada= Calendar.getInstance();
 		Calendar fechaSalida= Calendar.getInstance();
+		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
+		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
+		parametrizacionDTO.setCupoVehiculo(20);
+		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
+		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
 		fechaEntrada.set(2018, Calendar.AUGUST,21,9,00);
 		fechaSalida.set(2018, Calendar.AUGUST,23,17,00);
 		registro.setHoraEntrada(fechaEntrada.getTime());
 		registro.setHoraSalida(fechaSalida.getTime());
-		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro);
-		assertEquals(new BigDecimal("12000.0"), tarifaParqueo);
+		BigDecimal tarifaParqueo=estacionamiento.calcularValorParqueadero(registro,parametrizacionDTO);
+		assertEquals(new BigDecimal("12000"), tarifaParqueo);
 	}
 	
 	
 	@Test
 	public void testCuposDisponibleMoto() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
-		registro.setCilindraje(400);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.MOTO);
+		registro.getVehiculo().setCilindraje(400);
 		
-		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(15), registro.getTipoVehiculo());
+		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(15), registro.getVehiculo().getTipoVehiculo());
 		assertEquals(true, cuposDisponibles);
 	}
 	
@@ -162,10 +213,11 @@ public class EstacionamientoTest {
 	@Test
 	public void testCuposNoDisponibleMoto() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.MOTO);
-		registro.setCilindraje(400);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.MOTO);
+		registro.getVehiculo().setCilindraje(400);
 		
-		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(20), registro.getTipoVehiculo());
+		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(20), registro.getVehiculo().getTipoVehiculo());
 		assertEquals(false, cuposDisponibles);
 	}
 	
@@ -173,9 +225,10 @@ public class EstacionamientoTest {
 	@Test
 	public void testCuposDisponibleAuto() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.AUTO);
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.AUTO);
 		
-		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(15), registro.getTipoVehiculo());
+		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(15), registro.getVehiculo().getTipoVehiculo());
 		assertEquals(true, cuposDisponibles);
 	}
 	
@@ -183,8 +236,9 @@ public class EstacionamientoTest {
 	@Test
 	public void testCuposNoDisponibleAuto() {
 		RegistroDTO registro = new RegistroDTO();
-		registro.setTipoVehiculo(Estacionamiento.AUTO);
-		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(20), registro.getTipoVehiculo());
+		registro.setVehiculo(new VehiculoDTO());
+		registro.getVehiculo().setTipoVehiculo(Estacionamiento.AUTO);
+		Boolean cuposDisponibles=estacionamiento.validarDisponiblidadCupos(new Long(20), registro.getVehiculo().getTipoVehiculo());
 		assertEquals(false, cuposDisponibles);
 	}
 	

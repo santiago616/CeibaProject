@@ -29,7 +29,7 @@ public class RegistroVigilanteController {
 	@PostMapping(path = "/guardarRegistro")
 	public ResponseEntity<RegistroDTO> guardarRegistro(@RequestBody RegistroDTO registroVigilanteDTO) {
 		ResponseEntity<RegistroDTO> result = null;
-		if (!registroVigilanteDTO.getPlaca().isEmpty()) {
+		if (!registroVigilanteDTO.getVehiculo().getPlaca().isEmpty()) {
 			RegistroDTO registro=registroVigilanteService.almacenarRegistro(registroVigilanteDTO);
 			List<String> listaErrores = registroVigilanteService.getListaErrores();
 			if (listaErrores.isEmpty()) {
@@ -52,7 +52,7 @@ public class RegistroVigilanteController {
 	public ResponseEntity<RegistroDTO> facturarRegistro(@PathVariable(value = "placa") String placa) {
 		ResponseEntity<RegistroDTO> result = null;
 		RegistroDTO registroActualizado=registroVigilanteService.facturarVehiculo(placa);
-		if(registroActualizado!=null) {
+		if(registroActualizado.getId()!=null) {
 			result= ResponseEntity.ok().body(registroActualizado);
 		}else {
 			HttpHeaders headers = new HttpHeaders();
@@ -68,7 +68,7 @@ public class RegistroVigilanteController {
 	public ResponseEntity<RegistroDTO> obtenerRegistro(@PathVariable(value = "placa") String placa) {
 		ResponseEntity<RegistroDTO> resultado = null;
 		RegistroDTO registoConsultado = registroVigilanteService.consultarVehiculoPorPlaca(placa);
-		if (registoConsultado != null) {
+		if (registoConsultado.getId() != null) {
 			resultado = ResponseEntity.ok().body(registoConsultado);
 		} else {
 			resultado = ResponseEntity.badRequest().body(null);

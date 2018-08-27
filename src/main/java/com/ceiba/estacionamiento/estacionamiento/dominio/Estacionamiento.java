@@ -2,8 +2,10 @@ package com.ceiba.estacionamiento.estacionamiento.dominio;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import com.ceiba.estacionamiento.estacionamiento.dto.ParametrizacionDTO;
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
 
 public class Estacionamiento {
@@ -34,10 +36,9 @@ public class Estacionamiento {
 
 	public static final String AUTO = "AUTO";
 
+	public BigDecimal calcularValorParqueadero(RegistroDTO registroVigilante, ParametrizacionDTO parametrizacion) {
 
-	public BigDecimal calcularValorParqueadero(RegistroDTO registroVigilante) {
-
-		return calcularTarifaTipoVehiculo(registroVigilante,registroVigilante.getTiempoTotal());
+		return calcularTarifaTipoVehiculo(registroVigilante, calcularTiempoParqueado(registroVigilante), parametrizacion);
 	}
 
 	public int[] calcularTiempoParqueado(RegistroDTO registroVigilante) {
@@ -54,7 +55,7 @@ public class Estacionamiento {
 			dias++;
 			if (diff > TIEMPO_MAXIMO_DIA) {
 				int horasAdicionales = diff.intValue() % TIEMPO_MAXIMO_DIA;
-				dias=0;
+				dias = 0;
 				dias += Math.floorDiv(diff.intValue(), TIEMPO_MAXIMO_DIA);
 				if (horasAdicionales < TIEMPO_MAXIMO_HORAS) {
 					horas += horasAdicionales;
@@ -69,18 +70,16 @@ public class Estacionamiento {
 		return tiempoTotal;
 	}
 
-	public BigDecimal calcularTarifaTipoVehiculo(RegistroDTO registroVigilante, int[] tiempoTotal) {
+	public BigDecimal calcularTarifaTipoVehiculo(RegistroDTO registroVigilante, int[] tiempoTotal,
+			ParametrizacionDTO parametrizacion) {
 		BigDecimal totalTarifa = new BigDecimal(0);
-		if (registroVigilante.getTipoVehiculo().equalsIgnoreCase(MOTO)) {
-			totalTarifa = VALOR_DIA_MOTO.multiply(BigDecimal.valueOf(tiempoTotal[0])).add(VALOR_HORA_MOTO.multiply(BigDecimal.valueOf(tiempoTotal[1])));
-			
-			if (registroVigilante.getCilindraje() > LIMITE_CILINDRAJE) {
-				totalTarifa=totalTarifa.add(VALOR_LIMITE_CILINDRAJE);
-			}
-		} else {
-			if (registroVigilante.getTipoVehiculo().equalsIgnoreCase(AUTO)) {
-				totalTarifa =VALOR_DIA_CARRO.multiply(BigDecimal.valueOf(tiempoTotal[0]))
-						.add(VALOR_HORA_CARRO.multiply(BigDecimal.valueOf(tiempoTotal[1])));
+		if (registroVigilante.getVehiculo().getTipoVehiculo().equalsIgnoreCase(parametrizacion.getTipoVehiculo())) {
+			totalTarifa = parametrizacion.getValorDiaVehiculo().multiply(BigDecimal.valueOf(tiempoTotal[0]))
+					.add(parametrizacion.getValorHoraVehiculo().multiply(BigDecimal.valueOf(tiempoTotal[1])));
+			if (registroVigilante.getVehiculo() != null) {
+				if (registroVigilante.getVehiculo().getCilindraje() > LIMITE_CILINDRAJE) {
+					totalTarifa = totalTarifa.add(VALOR_LIMITE_CILINDRAJE);
+				}
 			}
 		}
 
@@ -103,7 +102,7 @@ public class Estacionamiento {
 		Boolean puedeIngresar = Boolean.TRUE;
 		Calendar hoy = Calendar.getInstance();
 		hoy.setTime(registroVigilanteDTO.getHoraEntrada());
-		if (registroVigilanteDTO.getPlaca().substring(0, 1).equals(RESTRICION_PLACA)) {
+		if (registroVigilanteDTO.getVehiculo().getPlaca().substring(0, 1).equals(RESTRICION_PLACA)) {
 			if (hoy.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || hoy.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
 				puedeIngresar = Boolean.TRUE;
 			} else {

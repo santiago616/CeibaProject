@@ -1,6 +1,7 @@
 package com.ceiba.estacionamiento.estacionamiento.service;
 import java.util.List;
 
+import com.ceiba.estacionamiento.estacionamiento.dto.ParametrizacionDTO;
 import com.ceiba.estacionamiento.estacionamiento.dto.RegistroDTO;
 
 public interface IRegistroVigilanteService {
@@ -16,5 +17,7 @@ public interface IRegistroVigilanteService {
 	public Boolean validarIngresoVehiculo(RegistroDTO registroVigilanteDTO);
 	
 	public List<String> getListaErrores();
+
+	ParametrizacionDTO consultarParametrosTipoVehiculo(String tipoVehiculo);
 
 }
