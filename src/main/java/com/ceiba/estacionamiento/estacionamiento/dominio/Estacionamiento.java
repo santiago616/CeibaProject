@@ -37,7 +37,8 @@ public class Estacionamiento {
 
 	public BigDecimal calcularValorParqueadero(RegistroDTO registroVigilante, ParametrizacionDTO parametrizacion) {
 
-		return calcularTarifaTipoVehiculo(registroVigilante, calcularTiempoParqueado(registroVigilante), parametrizacion);
+		return calcularTarifaTipoVehiculo(registroVigilante, calcularTiempoParqueado(registroVigilante),
+				parametrizacion);
 	}
 
 	public int[] calcularTiempoParqueado(RegistroDTO registroVigilante) {
@@ -76,12 +77,10 @@ public class Estacionamiento {
 			totalTarifa = parametrizacion.getValorDiaVehiculo().multiply(BigDecimal.valueOf(tiempoTotal[0]))
 					.add(parametrizacion.getValorHoraVehiculo().multiply(BigDecimal.valueOf(tiempoTotal[1])));
 		}
-			if (registroVigilante.getVehiculo() != null) {
-				if (registroVigilante.getVehiculo().getCilindraje() > LIMITE_CILINDRAJE) {
-					
-					totalTarifa = totalTarifa.add(VALOR_LIMITE_CILINDRAJE);
-				}
-			
+		if (registroVigilante.getVehiculo() != null
+				&& registroVigilante.getVehiculo().getCilindraje() > LIMITE_CILINDRAJE) {
+
+			totalTarifa = totalTarifa.add(VALOR_LIMITE_CILINDRAJE);
 		}
 
 		return totalTarifa;
