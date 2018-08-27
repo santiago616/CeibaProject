@@ -1,7 +1,6 @@
 package com.ceiba.estacionamiento.estacionamiento.dto;
 
 
-import java.util.Date;
 
 public class VehiculoDTO {
 

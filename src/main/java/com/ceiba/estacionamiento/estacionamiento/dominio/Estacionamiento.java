@@ -2,7 +2,6 @@ package com.ceiba.estacionamiento.estacionamiento.dominio;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import com.ceiba.estacionamiento.estacionamiento.dto.ParametrizacionDTO;
@@ -76,11 +75,13 @@ public class Estacionamiento {
 		if (registroVigilante.getVehiculo().getTipoVehiculo().equalsIgnoreCase(parametrizacion.getTipoVehiculo())) {
 			totalTarifa = parametrizacion.getValorDiaVehiculo().multiply(BigDecimal.valueOf(tiempoTotal[0]))
 					.add(parametrizacion.getValorHoraVehiculo().multiply(BigDecimal.valueOf(tiempoTotal[1])));
+		}
 			if (registroVigilante.getVehiculo() != null) {
 				if (registroVigilante.getVehiculo().getCilindraje() > LIMITE_CILINDRAJE) {
+					
 					totalTarifa = totalTarifa.add(VALOR_LIMITE_CILINDRAJE);
 				}
-			}
+			
 		}
 
 		return totalTarifa;

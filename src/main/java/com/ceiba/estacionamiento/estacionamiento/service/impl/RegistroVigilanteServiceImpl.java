@@ -62,7 +62,7 @@ public class RegistroVigilanteServiceImpl implements IRegistroVigilanteService {
 	@Override
 	@Transactional
 	public RegistroDTO facturarVehiculo(String placa) {
-		RegistroDTO registroVigilanteDTO= new RegistroDTO();
+		RegistroDTO registroVigilanteDTO;
 		registroVigilanteDTO=consultarVehiculoPorPlaca(placa);
 		if (registroVigilanteDTO.getId() != null) {
 			registroVigilanteDTO.setHoraSalida(new Date());

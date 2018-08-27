@@ -33,7 +33,6 @@ public class EstacionamientoTest {
 		Calendar fechaSalida= Calendar.getInstance();
 		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
 		parametrizacionDTO.setTipoVehiculo(Estacionamiento.AUTO);
-		parametrizacionDTO.setCupoVehiculo(20);
 		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_CARRO);
 		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_CARRO);
 		
@@ -54,7 +53,6 @@ public class EstacionamientoTest {
 		Calendar fechaSalida= Calendar.getInstance();
 		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
 		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
-		parametrizacionDTO.setCupoVehiculo(20);
 		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
 		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
@@ -76,7 +74,6 @@ public class EstacionamientoTest {
 		Calendar fechaSalida= Calendar.getInstance();
 		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
 		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
-		parametrizacionDTO.setCupoVehiculo(20);
 		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
 		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
@@ -98,7 +95,6 @@ public class EstacionamientoTest {
 		Calendar fechaSalida= Calendar.getInstance();
 		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
 		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
-		parametrizacionDTO.setCupoVehiculo(20);
 		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
 		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
@@ -119,7 +115,6 @@ public class EstacionamientoTest {
 		Calendar fechaSalida= Calendar.getInstance();
 		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
 		parametrizacionDTO.setTipoVehiculo(Estacionamiento.AUTO);
-		parametrizacionDTO.setCupoVehiculo(20);
 		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_CARRO);
 		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_DIA_CARRO);
 		
@@ -140,7 +135,6 @@ public class EstacionamientoTest {
 		Calendar fechaSalida= Calendar.getInstance();
 		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
 		parametrizacionDTO.setTipoVehiculo(Estacionamiento.AUTO);
-		parametrizacionDTO.setCupoVehiculo(20);
 		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_CARRO);
 		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_CARRO);
 		
@@ -162,7 +156,6 @@ public class EstacionamientoTest {
 		Calendar fechaSalida= Calendar.getInstance();
 		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
 		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
-		parametrizacionDTO.setCupoVehiculo(20);
 		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
 		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		
@@ -185,7 +178,6 @@ public class EstacionamientoTest {
 		Calendar fechaSalida= Calendar.getInstance();
 		ParametrizacionDTO parametrizacionDTO = new ParametrizacionDTO();
 		parametrizacionDTO.setTipoVehiculo(Estacionamiento.MOTO);
-		parametrizacionDTO.setCupoVehiculo(20);
 		parametrizacionDTO.setValorDiaVehiculo(Estacionamiento.VALOR_DIA_MOTO);
 		parametrizacionDTO.setValorHoraVehiculo(Estacionamiento.VALOR_HORA_MOTO);
 		

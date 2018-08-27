@@ -8,21 +8,11 @@ public class ParametrizacionDTO {
 	
 	private BigDecimal valorDiaVehiculo;
 	
-	private int cupoVehiculo;
 	
 	private String tipoVehiculo;
 
 	public ParametrizacionDTO() {
-	}
-
-
-
-	public int getCupoVehiculo() {
-		return cupoVehiculo;
-	}
-
-	public void setCupoVehiculo(int cupoVehiculo) {
-		this.cupoVehiculo = cupoVehiculo;
+		super();
 	}
 
 	public String getTipoVehiculo() {
