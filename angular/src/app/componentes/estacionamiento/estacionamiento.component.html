@@ -6,19 +6,19 @@
                 <h1>Ingreso vehiculo</h1>
                 <div class="form-group">
                     <label for="placa">Placa</label>
-                    <input type="text" class="form-control" id="name" required  [(ngModel)]="registroNuevo.placa">
+                    <input type="text" class="form-control" id="name" required  [(ngModel)]="registroNuevo.vehiculo.placa">
                 </div>
 
                 <div class="form-group">
                         <label for="tipoVehiculo">Tipo Vehiculo</label>
-                        <p-dropdown [options]="tiposVehiculo" [(ngModel)]="registroNuevo.tipoVehiculo" [autoWidth]="false"
+                        <p-dropdown [options]="tiposVehiculo" [(ngModel)]="registroNuevo.vehiculo.tipoVehiculo" [autoWidth]="false"
                         ></p-dropdown>
                     </div>
 
                 <div class="form-group">
                     <label for="cilindraje">Cilindraje CC</label>
-                    <input type="text" class="form-control" id="alterEgo"  [(ngModel)]="registroNuevo.cilindraje"
-                    [disabled]="registroNuevo.tipoVehiculo=='AUTO'">
+                    <input type="text" class="form-control" id="alterEgo"  [(ngModel)]="registroNuevo.vehiculo.cilindraje"
+                    [disabled]="registroNuevo.vehiculo.tipoVehiculo=='AUTO'||registroNuevo.vehiculo.tipoVehiculo==null">
                 </div>
 
                
@@ -49,15 +49,15 @@
                                     <th>Cilindraje</th>
                                     <th style="width: 130px">Fecha entrada</th>
                                     <th style="width: 130px">Fecha Salida</th>
-                                    <th>Estado</th>
+                                    <th>Facturado</th>
                                     <th>Valor total</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-registro>
                                 <tr>
-                                    <td>{{registro.placa}}</td>
-                                    <td>{{registro.tipoVehiculo}}</td>
-                                    <td>{{registro.cilindraje}} CC</td>
+                                    <td>{{registro.vehiculo.placa}}</td>
+                                    <td>{{registro.vehiculo.tipoVehiculo}}</td>
+                                    <td>{{registro.vehiculo.cilindraje}} CC</td>
                                     <td style="width: 130px">{{registro.horaEntrada | date: 'dd-MM-yyyy HH:mm'}}</td>
                                     <td style="width: 130px">{{registro.horaSalida | date: 'dd-MM-yyyy HH:mm'}}</td>
                                     <td>{{registro.facturado}}</td>

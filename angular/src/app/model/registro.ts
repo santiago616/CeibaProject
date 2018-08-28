@@ -1,8 +1,9 @@
+import { Vehiculo } from "./vehiculo";
+
 export class Registro{
 
-    public placa:string;
-    public tipoVehiculo:string;
-    public cilindraje:number;
+    public id:number;
+    public vehiculo:Vehiculo;
     public horaEntrada:Date;
     public horaSalida:Date;
     public tiempoTotal:number[];

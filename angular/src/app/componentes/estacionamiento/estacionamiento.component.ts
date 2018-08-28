@@ -4,6 +4,7 @@ import { Message } from 'primeng/components/common/api';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Registro } from '../../model/registro';
 import { EstacionamientoServiceService } from '../estacionamiento-service.service';
+import { Vehiculo } from '../../model/vehiculo';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class EstacionamientoComponent implements OnInit {
     { label: 'Moto', value: 'MOTO' }
     ]
     this.registroNuevo = new Registro();
+    this.registroNuevo.vehiculo=new Vehiculo();
   }
 
   ngOnInit() {
@@ -58,7 +60,8 @@ export class EstacionamientoComponent implements OnInit {
   agregarRegistro() {
     let resultado;
     this.registroNuevo.horaEntrada = new Date();
-    this.registroNuevo.placa = this.registroNuevo.placa.toUpperCase();
+    this.registroNuevo.vehiculo.placa = this.registroNuevo.vehiculo.placa.toUpperCase();
+    if(this.registroNuevo.vehiculo.tipoVehiculo!=undefined){
     this.registroService.addRegistro(this.registroNuevo).subscribe((response) => {
       if(response!=null){
         this.showSuccess('Registro creado exitosamente');
@@ -67,12 +70,15 @@ export class EstacionamientoComponent implements OnInit {
        this.showError('No se ha podido crear el registro');
       }
     });
+  }else{
+    this.showError('El tipo de vehiculo es obligatorio')
+  }
 
   }
 
   facturarRegistro() {
     let resultado;
-    this.registroService.updateRegistro(this.registros[0].placa).subscribe((response) => {
+    this.registroService.updateRegistro(this.registros[0].vehiculo.placa).subscribe((response) => {
       if(response!=null){
         this.registros=[];
         resultado=response;

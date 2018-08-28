@@ -31,7 +31,7 @@ export class EstacionamientoServiceService {
 
   addRegistro (registro: Registro): Observable<Response> {
     return this.http.post<Response>(this.registrosUrl+'/guardarRegistro', registro, httpOptions).pipe(
-      tap((registro: Registro) => this.log(`agregando registro w/ id=${registro.placa}`)),
+      tap((registro: Registro) => this.log(`agregando registro w/ id=${registro.vehiculo.placa}`)),
       catchError(this.handleError<Response>('addRegistro'))
     );
   }
